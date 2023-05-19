@@ -3,19 +3,8 @@ using System.Collections.Generic;
 
 namespace MarketPlace
 {
-    public class productInfo
-    {
-        public string itemName { get; set; }
-        public string itemCategory { get; set; }
-        public int itemPrice { get; set; }
-
-    }
     internal class Program
     {
-        static List<productInfo> products = new List<productInfo>();
-        static List<productInfo> cartItems = new List<productInfo>();
-        
-
         static void viewMarket()
         {
 
@@ -23,12 +12,6 @@ namespace MarketPlace
 
         static void viewwCart()
         {
-            Console.WriteLine("Items in cart:");
-            foreach (productInfo cartItem in cartItems)
-            {
-                Console.WriteLine("- " + cartItem);
-
-            }
 
         }
         static void checkOut()
