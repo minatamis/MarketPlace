@@ -13,4 +13,5 @@ namespace Data
         public int userMobile;
 
     }
+
 }

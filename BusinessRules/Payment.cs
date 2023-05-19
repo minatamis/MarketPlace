@@ -43,7 +43,7 @@
             }
 
         }
-        static bool numberCountChecker(int number, int count)
+        public static bool numberCountChecker(int number, int count)
         {
             char[] mobileArr = number.ToString().ToCharArray();
 

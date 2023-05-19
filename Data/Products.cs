@@ -3,7 +3,7 @@
     public class Products
     {
         public string itemName;
-        public int itemPrice;
+        public double itemPrice;
         public string itemCategory;
         public string itemDescription;
         public string itemRFS;

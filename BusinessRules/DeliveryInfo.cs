@@ -17,8 +17,13 @@ namespace BusinessRules
             string name = Console.ReadLine();
             Console.WriteLine("Address: ");
             string address = Console.ReadLine();
-            Console.WriteLine("Contact Number: ");
-            int mobileNumber = Convert.ToInt32(Console.ReadLine());
+            int mobileNumber;
+            do
+            {
+                Console.WriteLine("Contact Number: ");
+                mobileNumber = Convert.ToInt32(Console.ReadLine());
+            }
+            while (Payment.numberCountChecker(mobileNumber,11) == false);
 
             //sample store only
             UserInfo userDeliveryInfo = new UserInfo

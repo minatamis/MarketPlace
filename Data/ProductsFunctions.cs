@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    internal class ViewProducts
+    public class ProductsFunctions
     {
-        List<Products> products = new List<Products>();
+        public static List<Products> products = new List<Products>();
 
-        public void addProduct(Products prod)
+        public static void addProduct(Products prod)
         {
             products.Add(prod);
 
         }
-        public void removeProduct(Products prod)
+        public static void removeProduct(Products prod)
         {
             products.Remove(prod);
 
         }
-        public void displayProducts(Products prod)
+        public static void displayProducts(Products prod)
         {
             Console.WriteLine($"Item Name: {prod.itemName}");
             Console.WriteLine($"Price: {prod.itemPrice}");
