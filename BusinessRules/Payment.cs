@@ -32,6 +32,7 @@
             }
             else if (choice == 2)
             {
+                DeliveryInfo.askDeliveryInfo();
                 Console.WriteLine("Please prepare you payment upon delivery!");
 
             }
