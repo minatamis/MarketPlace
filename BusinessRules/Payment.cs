@@ -32,7 +32,7 @@
             }
             else if (choice == 2)
             {
-                
+                Console.WriteLine("Please prepare you payment upon delivery!");
 
             }
             else

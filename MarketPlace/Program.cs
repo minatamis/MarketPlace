@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using ViewProducts;
 
 namespace MarketPlace
 {
     internal class Program
     {
-        static void viewMarket()
-        {
-
-        }
-
-        static void viewwCart()
-        {
-
-        }
-        static void checkOut()
-        {
-
-        }
         static void Main(string[] args)
         {
             while (true)
@@ -33,15 +21,15 @@ namespace MarketPlace
                 switch (choice)
                 {
                     case 1:
-                        viewMarket();
+                        
                         break;
 
                     case 2:
-                        viewwCart();
+                        
                         break;
 
                     case 3:
-                        checkOut();
+                        
                         break;
 
                     case 4:

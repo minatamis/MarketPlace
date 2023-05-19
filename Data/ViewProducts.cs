@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    internal class MarketProucts
+    internal class ViewProducts
     {
         List<Products> products = new List<Products>();
 
@@ -22,7 +22,12 @@ namespace Data
         }
         public void displayProducts(Products prod)
         {
-            Console.WriteLine($"Item Name {}");
+            Console.WriteLine($"Item Name: {prod.itemName}");
+            Console.WriteLine($"Price: {prod.itemPrice}");
+            Console.WriteLine($"Category: {prod.itemCategory}");
+            Console.WriteLine($"Description: {prod.itemDescription}");
+            Console.WriteLine($"Reason for Selling: {prod.itemRFS}");
+
         }
 
     }
