@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace Market_Models
 {
     public class Products
     {

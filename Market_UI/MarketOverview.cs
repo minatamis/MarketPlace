@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Market_Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data;
+using Market_Models;
 
-namespace UI
+namespace Market_UI
 {
     public class MarketOverview
     {
@@ -123,5 +124,4 @@ namespace UI
         }
 
     }
-
 }
