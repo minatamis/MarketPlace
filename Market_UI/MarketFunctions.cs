@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market_Models;
+using Market_Data;
 
 namespace Market_UI
 {
-    public class MarketOverview
+    public class MarketFunctions
     {
         public static void ViewProducts(List<Products> products)
         {
@@ -100,7 +101,7 @@ namespace Market_UI
             }
 
         }
-        public static void RemoveProduct(List<Products> products)
+        public static void RemoveProduct()
         {
             Console.Clear();
             Console.WriteLine("Remove Product:");
@@ -109,17 +110,17 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            //if (products.ContainsKey(product))
-            //{
-            //    ProductsFunctions.removeProduct(product);
-            //    Console.WriteLine("Product has been removed.");
+            if(ProductsFunctions.searchProduct(product))
+            {
+                //ProductsFunctions.removeProduct(product);
+                Console.WriteLine("Product has been removed.");
 
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Product is not available.");
+            }
+            else
+            {
+                Console.WriteLine("Product is not available.");
 
-            //}
+            }
 
         }
 

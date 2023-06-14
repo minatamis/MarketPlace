@@ -11,7 +11,7 @@ namespace MarketPlace
         static DateTime gettime = DateTime.Now;
         static void Main(string[] args)
         {
-            MarketOverview marketOverview = new MarketOverview();
+            MarketFunctions marketOverview = new MarketFunctions();
             // Initialize a list to hold the products, prices, and descriptions
             //Dictionary<string, (double Price, string Description)> products = new Dictionary<string, (double Price, string Description)>();
 
@@ -36,17 +36,17 @@ namespace MarketPlace
                 switch (choice)
                 {
                     case "1"://unfinished
-                        MarketOverview.ViewProducts(ProductsFunctions.products);
+                        MarketFunctions.ViewProducts(ProductsFunctions.products);
 
                         break;
 
                     case "2":
-                        MarketOverview.AddProduct();
+                        MarketFunctions.AddProduct();
 
                         break;
 
                     case "3"://unfinished
-                        //MarketOverview.RemoveProduct(ProductsFunctions.products);
+                        MarketFunctions.RemoveProduct();
 
                         break;
 

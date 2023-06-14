@@ -21,6 +21,21 @@ namespace Market_Data
             products.Remove(prod);
 
         }
+        public static bool searchProduct(string prod)
+        {
+            foreach (var product in products)
+            {
+                if (product.itemName.Contains(prod))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
         public static void displayProducts(Products prod)
         {
             Console.WriteLine($"Item Name: {prod.itemName}");
