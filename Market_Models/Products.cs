@@ -7,6 +7,9 @@
         public string itemCategory;
         public string itemDescription;
         public string itemRFS;
+        public DateTime TimeAdded;
+
+        
 
     }
 

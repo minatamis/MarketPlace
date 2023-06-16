@@ -32,6 +32,10 @@ namespace Market_UI
 
                     index++;
 
+                    TimeSpan timeSinceAdded = DateTime.Now - product.TimeAdded;
+                    string timeAgo = GetTimeAgoString(timeSinceAdded);
+
+                    Console.WriteLine($"Posted {timeAgo} ago");
                 }
 
                 //Console.WriteLine("\nSelect a product number to add to cart (0 to cancel): ");
@@ -73,13 +77,16 @@ namespace Market_UI
                     Console.Write("Enter your reason for selling: ");
                     string rfs = Console.ReadLine();
 
+                    DateTime timeAdded = DateTime.Now;
+
                     Products addProd = new Products
                     {
                         itemName = product,
                         itemPrice = price,
                         itemCategory = category,
                         itemDescription = description,
-                        itemRFS = rfs
+                        itemRFS = rfs,
+                        TimeAdded = timeAdded,
                     };
                     ProductsFunctions.addProduct(addProd);
 
@@ -122,6 +129,39 @@ namespace Market_UI
 
             }
 
+        }
+
+        public static void EditProduct()
+        { 
+            Console.Clear();
+            Console.WriteLine("Enter the name of selected item to edit: ");
+            string selected = Console.ReadLine();
+
+        /*    if (ProductsFunctions.searchProduct(selected))
+            {
+                Console.WriteLine("");
+            } */
+                
+         }
+
+        static string GetTimeAgoString(TimeSpan timeSpan)
+        {
+            if (timeSpan.TotalSeconds < 60)
+            {
+                return $"{Convert.ToInt32(Math.Round(timeSpan.TotalSeconds))} seconds";
+            }
+            else if (timeSpan.TotalMinutes < 60)
+            {
+                return $"{Math.Round(timeSpan.TotalMinutes)} minutes";
+            }
+            else if (timeSpan.TotalHours < 24)
+            {
+                return $"{Math.Round(timeSpan.TotalHours)} hours";
+            }
+            else
+            {
+                return $"{Convert.ToInt32(Math.Round(timeSpan.TotalDays))} days";
+            }
         }
 
     }

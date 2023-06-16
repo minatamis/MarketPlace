@@ -43,6 +43,7 @@ namespace Market_Data
             Console.WriteLine($"Category: {prod.itemCategory}");
             Console.WriteLine($"Description: {prod.itemDescription}");
             Console.WriteLine($"Reason for Selling: {prod.itemRFS}");
+            
 
         }
 
