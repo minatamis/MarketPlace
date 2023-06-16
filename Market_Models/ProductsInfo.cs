@@ -1,6 +1,6 @@
 ﻿namespace Market_Models
 {
-    public class Products
+    public class ProductsInfo
     {
         public string itemName;
         public double itemPrice;

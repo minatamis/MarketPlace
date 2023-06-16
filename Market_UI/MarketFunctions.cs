@@ -11,7 +11,7 @@ namespace Market_UI
 {
     public class MarketFunctions
     {
-        public static void ViewProducts(List<Products> products)
+        public static void ViewProducts(List<ProductsInfo> products)
         {
             Console.Clear();
             Console.WriteLine("Products:");
@@ -73,7 +73,7 @@ namespace Market_UI
                     Console.Write("Enter your reason for selling: ");
                     string rfs = Console.ReadLine();
 
-                    Products addProd = new Products
+                    ProductsInfo addProd = new ProductsInfo
                     {
                         itemName = product,
                         itemPrice = price,
@@ -112,7 +112,8 @@ namespace Market_UI
 
             if(ProductsFunctions.searchProduct(product))
             {
-                //ProductsFunctions.removeProduct(product);
+                ProductsInfo removeProd = new ProductsInfo();
+                //ProductsFunctions.removeProduct();
                 Console.WriteLine("Product has been removed.");
 
             }

@@ -9,14 +9,14 @@ namespace Market_Data
 {
     public class ProductsFunctions
     {
-        public static List<Products> products = new List<Products>();
+        public static List<ProductsInfo> products = new List<ProductsInfo>();
 
-        public static void addProduct(Products prod)
+        public static void addProduct(ProductsInfo prod)
         {
             products.Add(prod);
 
         }
-        public static void removeProduct(Products prod)
+        public static void removeProduct(ProductsInfo prod)
         {
             products.Remove(prod);
 
@@ -36,7 +36,7 @@ namespace Market_Data
             }
             return false;
         }
-        public static void displayProducts(Products prod)
+        public static void displayProducts(ProductsInfo prod)
         {
             Console.WriteLine($"Item Name: {prod.itemName}");
             Console.WriteLine($"Price: {prod.itemPrice}");

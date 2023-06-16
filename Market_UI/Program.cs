@@ -7,7 +7,7 @@ namespace MarketPlace
 {
     class Program
     {
-        static List<string> cart = new List<string>();
+        //static List<string> cart = new List<string>();
         static DateTime gettime = DateTime.Now;
         static void Main(string[] args)
         {
@@ -31,36 +31,36 @@ namespace MarketPlace
                 Console.WriteLine("6. Exit");
                 Console.Write("Please select an option: ");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                string choice = Console.ReadLine();
 
                 switch (choice)
                 {
-                    case 1://unfinished
+                    case "1"://unfinished
                         MarketFunctions.ViewProducts(ProductsFunctions.products);
 
                         break;
 
-                    case 2:
+                    case "2":
                         MarketFunctions.AddProduct();
 
                         break;
 
-                    case 3://unfinished
+                    case "3"://unfinished
                         MarketFunctions.RemoveProduct();
 
                         break;
 
-                    case 4:
+                    case "4":
                         //to follow
 
                         break;
 
-                    case 5:
-                        ViewCart();
+                    case "5":
+                        //ViewCart();
 
                         break;
 
-                    case 6:
+                    case "6":
                         Environment.Exit(0);
 
                         break;
@@ -116,29 +116,29 @@ namespace MarketPlace
         }*/
 
 
-        static void ViewCart()
-        {
-            Console.Clear();
-            Console.WriteLine("Cart:");
-            Console.WriteLine("===========================");
+        //static void ViewCart()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Cart:");
+        //    Console.WriteLine("===========================");
 
-            if (cart.Count == 0)
-            {
-                Console.WriteLine("Cart is empty.");
-            }
-            else
-            {
-                int index = 1;
-                foreach (string product in cart)
-                {
-                    Console.WriteLine("{0}. {1}", index, product);
-                    index++;
+        //    if (cart.Count == 0)
+        //    {
+        //        Console.WriteLine("Cart is empty.");
+        //    }
+        //    else
+        //    {
+        //        int index = 1;
+        //        foreach (string product in cart)
+        //        {
+        //            Console.WriteLine("{0}. {1}", index, product);
+        //            index++;
 
-                }
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
 
     }
 
