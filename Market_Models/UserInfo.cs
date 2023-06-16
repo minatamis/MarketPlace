@@ -8,9 +8,9 @@ namespace Market_Models
 {
     public class UserInfo
     {
-        public string userName;
-        public string userAddress;
-        public int userMobile;
+        public string username;
+        public string useraddress;
+        public int usermobile;
 
     }
 

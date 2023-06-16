@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Market_Models\Market_Models.csproj" />
-    <ProjectReference Include="..\UI\Market_Models.csproj" />
   </ItemGroup>
+
 
 </Project>

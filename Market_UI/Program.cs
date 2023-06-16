@@ -31,36 +31,36 @@ namespace MarketPlace
                 Console.WriteLine("6. Exit");
                 Console.Write("Please select an option: ");
 
-                string choice = Console.ReadLine();
+                int choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
                 {
-                    case "1"://unfinished
+                    case 1://unfinished
                         MarketFunctions.ViewProducts(ProductsFunctions.products);
 
                         break;
 
-                    case "2":
+                    case 2:
                         MarketFunctions.AddProduct();
 
                         break;
 
-                    case "3"://unfinished
+                    case 3://unfinished
                         MarketFunctions.RemoveProduct();
 
                         break;
 
-                    case "4":
+                    case 4:
                         //to follow
 
                         break;
 
-                    case "5":
+                    case 5:
                         ViewCart();
 
                         break;
 
-                    case "6":
+                    case 6:
                         Environment.Exit(0);
 
                         break;
