@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market_Models", "Market_Mod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market_Data", "Market_Data\Market_Data.csproj", "{7CE8C9AE-7E6C-4D37-8208-174D458AB526}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessRules", "BusinessRules\BusinessRules.csproj", "{3D04FCA2-8827-4E3D-B690-BA7429200405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market_BusinessRules", "BusinessRules\Market_BusinessRules.csproj", "{3D04FCA2-8827-4E3D-B690-BA7429200405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
