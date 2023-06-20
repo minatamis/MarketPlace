@@ -9,7 +9,7 @@ namespace BusinessRules
 {
     internal class DeliveryInfo
     {
-        public static void askDeliveryInfo() 
+        public static void askDeliveryInfo(Products) 
         {
 
             Console.WriteLine("Delivery Info");

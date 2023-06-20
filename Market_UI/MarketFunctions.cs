@@ -110,8 +110,11 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            if(ProductsFunctions.searchProduct(product))
+            var productSearched = ProductsFunctions.searchProduct(product);
+
+            if (productSearched != null)
             {
+                productSearched.itemCategory
                 //ProductsFunctions.removeProduct(product);
                 Console.WriteLine("Product has been removed.");
 

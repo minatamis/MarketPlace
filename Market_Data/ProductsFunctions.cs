@@ -17,24 +17,25 @@ namespace Market_Data
 
         }
         public static void removeProduct(Products prod)
-        {
+        {prod.
+
             products.Remove(prod);
 
         }
-        public static bool searchProduct(string prod)
+        public static Products searchProduct(string prod)
         {
             foreach (var product in products)
             {
                 if (product.itemName.Contains(prod))
                 {
-                    return true;
+                    return product;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
-            return false;
+            return null;
         }
         public static void displayProducts(Products prod)
         {
