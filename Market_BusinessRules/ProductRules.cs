@@ -1,29 +1,29 @@
-﻿using System;
+﻿using Market_Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Market_Data;
 using Market_Models;
 
-namespace Market_Data
+namespace Market_BusinessRules
 {
-    public class ProductsFunctions
+    public class ProductRules
     {
-        public static List<ProductsInfo> products = new List<ProductsInfo>();
-
         public static void addProduct(ProductsInfo prod)
         {
-            products.Add(prod);
+            ProductList.products.Add(prod);
 
         }
         public static void removeProduct(ProductsInfo prod)
         {
-            products.Remove(prod);
+            ProductList.products.Remove(prod);
 
         }
-        public static bool searchProduct(string prod)
+        public static bool checkProductExistence(string prod)
         {
-            foreach (var product in products)
+            foreach (var product in ProductList.products)
             {
                 if (product.itemName.Contains(prod))
                 {
@@ -36,7 +36,7 @@ namespace Market_Data
             }
             return false;
         }
-        public static void displayProducts(ProductsInfo prod)
+        public static void getProducts(ProductsInfo prod)
         {
             Console.WriteLine($"Item Name: {prod.itemName}");
             Console.WriteLine($"Price: {prod.itemPrice}");
@@ -47,5 +47,4 @@ namespace Market_Data
         }
 
     }
-
 }
