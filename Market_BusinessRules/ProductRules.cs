@@ -1,5 +1,4 @@
-﻿using Market_Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,11 @@ namespace Market_BusinessRules
 {
     public class ProductRules
     {
+        
+        public static List<ProductsInfo> getList(List<ProductsInfo> products)
+        {
+            return ProductList.products;
+        }
         public static void addProduct(ProductsInfo prod)
         {
             ProductList.products.Add(prod);

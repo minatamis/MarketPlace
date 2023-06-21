@@ -1,11 +1,10 @@
-﻿using Market_Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market_Models;
-using Market_Data;
+using Market_BusinessRules;
 
 namespace Market_UI
 {
@@ -28,7 +27,7 @@ namespace Market_UI
                 foreach (var product in products)
                 {
                     Console.WriteLine($"{index})");
-                    ProductsFunctions.displayProducts(product);
+                    ProductRules.getProducts(product);
 
                     index++;
 
@@ -81,7 +80,7 @@ namespace Market_UI
                         itemDescription = description,
                         itemRFS = rfs
                     };
-                    ProductsFunctions.addProduct(addProd);
+                    ProductRules.addProduct(addProd);
 
                     //products.Add(product, (price, description));
                     Console.WriteLine("Product has been added.");
@@ -110,7 +109,7 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            if(ProductsFunctions.searchProduct(product))
+            if(ProductRules.checkProductExistence(product))
             {
                 ProductsInfo removeProd = new ProductsInfo();
                 //ProductsFunctions.removeProduct();

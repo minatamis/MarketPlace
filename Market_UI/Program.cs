@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Market_UI;
-using Market_Data;
+using Market_BusinessRules;
 
 namespace MarketPlace
 {
@@ -36,7 +36,7 @@ namespace MarketPlace
                 switch (choice)
                 {
                     case "1"://unfinished
-                        MarketFunctions.ViewProducts(ProductsFunctions.products);
+                        MarketFunctions.ViewProducts(ProductRules.products);
 
                         break;
 
