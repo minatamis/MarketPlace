@@ -7,7 +7,7 @@ using Market_Models;
 
 namespace Market_Data
 {
-    public class ProductList
+    public class ProductDataServices
     {
         public static List<ProductsInfo> products = new List<ProductsInfo>();
 

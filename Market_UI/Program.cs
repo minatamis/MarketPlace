@@ -36,7 +36,7 @@ namespace MarketPlace
                 switch (choice)
                 {
                     case "1"://unfinished
-                        MarketFunctions.ViewProducts(ProductsFunctions.products);
+                        MarketFunctions.ViewProducts(ProductDataServices.products);
 
                         break;
 
@@ -51,7 +51,7 @@ namespace MarketPlace
                         break;
 
                     case "4":
-                        //to follow
+                        MarketFunctions.EditProduct();
 
                         break;
 

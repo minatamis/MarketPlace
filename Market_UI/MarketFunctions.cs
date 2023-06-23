@@ -1,10 +1,11 @@
-﻿using Market_Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market_Models;
+using Market_BusinessRules;
+using System.Collections.Concurrent;
 using Market_Data;
 
 namespace Market_UI
@@ -24,13 +25,12 @@ namespace Market_UI
             }
             else
             {
-                int index = 1;
+                Console.WriteLine("Products: ");
                 foreach (var product in products)
                 {
-                    Console.WriteLine($"{index})");
-                    ProductsFunctions.displayProducts(product);
-
-                    index++;
+                    
+                    string productInfo = ProductRules.getProducts(product);
+                    Console.WriteLine(productInfo);
 
                 }
 
@@ -81,7 +81,7 @@ namespace Market_UI
                         itemDescription = description,
                         itemRFS = rfs
                     };
-                    ProductsFunctions.addProduct(addProd);
+                    ProductRules.addProduct(addProd);
 
                     //products.Add(product, (price, description));
                     Console.WriteLine("Product has been added.");
@@ -110,7 +110,7 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            if(ProductsFunctions.searchProduct(product))
+            if(ProductRules.checkProductExistence(product))
             {
                 ProductsInfo removeProd = new ProductsInfo();
                 //ProductsFunctions.removeProduct();
@@ -125,5 +125,52 @@ namespace Market_UI
 
         }
 
+
+
+        public static void EditProduct()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit Product:");
+            Console.WriteLine("**************************");
+
+            Console.Write("Enter the name of the product to Edit: ");
+            string itemName = Console.ReadLine();
+
+            ProductsInfo newprod = ProductDataServices.products.Find(p => p.itemName == itemName);
+
+            if (newprod == null)
+            {
+                Console.WriteLine("Product not found.");
+                return;
+
+            }
+            else
+            {
+                Console.WriteLine("Enter the new item name: ");
+                newprod.itemName = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item price:");
+                newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Enter the new item category:");
+                newprod.itemCategory = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item description:");
+                newprod.itemDescription = Console.ReadLine();
+
+                Console.WriteLine("Enter the new reason for selling:");
+                newprod.itemRFS = Console.ReadLine();
+
+                Console.WriteLine("Product edited successfully!");
+            }
+
+
+        }
     }
-}
+
+
+ }
+
+       
+    
+
