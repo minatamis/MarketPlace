@@ -125,8 +125,6 @@ namespace Market_UI
 
         }
 
-
-
         public static void EditProduct()
         {
             Console.Clear();

@@ -10,6 +10,7 @@ namespace Market_Models
     {
         public string username;
         public string useraddress;
+        public string useremail;
         public int usermobile;
 
     }
