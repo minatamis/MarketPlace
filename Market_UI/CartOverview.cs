@@ -35,5 +35,18 @@ namespace Market_UI
             UserRules.getUser(getNewUser);
         }
 
+        public static void GetAddress(string address)
+        {
+            Console.Clear();
+            Console.WriteLine("Enter your Address: ");
+            address = Console.ReadLine();
+
+            UserInfo getAdd = new UserInfo
+            {
+                useraddress = address
+            };
+            UserRules.getUser(getAdd);
+        }
+
     }
 }
