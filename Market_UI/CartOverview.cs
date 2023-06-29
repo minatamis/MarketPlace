@@ -1,4 +1,5 @@
 ﻿using Market_BusinessRules;
+using Market_Data;
 using Market_Models;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,37 @@ namespace Market_UI
                 useraddress = address
             };
             UserRules.getUser(getAdd);
+        }
+
+        public static void EditUser()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit Shipping Info");
+            Console.WriteLine("******************************************");
+
+            Console.WriteLine("Enter the name you want to edit: ");
+            string username = Console.ReadLine();
+
+            UserInfo newuser = UserDataServices.users.Find(p => p.username == username);
+
+            if (newuser == null)
+            {
+                Console.WriteLine("User not found");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Enter the new name: ");
+                newuser.username = Console.ReadLine();
+
+                Console.WriteLine("Enter the new address: ");
+                newuser.useraddress = Console.ReadLine();
+
+                Console.WriteLine("Enter the new mobile number: ");
+                newuser.usermobile = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("User edited successfully!");
+            }
         }
 
     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Market_Models;
 using Market_BusinessRules;
 using System.Collections.Concurrent;
-using Market_Data;
 
 namespace Market_UI
 {
@@ -134,7 +133,7 @@ namespace Market_UI
             Console.Write("Enter the name of the product to Edit: ");
             string itemName = Console.ReadLine();
 
-            ProductsInfo newprod = ProductDataServices.products.Find(p => p.itemName == itemName);
+           // ProductsInfo newprod = ProductDataServices.products.Find(p => p.itemName == itemName);
 
             if (newprod == null)
             {
