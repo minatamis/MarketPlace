@@ -10,7 +10,10 @@ namespace Market_BusinessRules
 {
     public class UserRules
     {
-
+        public static void getUser(UserInfo user)
+        {
+            UserDataServices.users.Add(user);
+        }
         public static UserInfo retrieveUser(string user)
         {
             foreach (var userr in UserDataServices.users)
@@ -26,5 +29,6 @@ namespace Market_BusinessRules
             }
             return null;
         }
+
     }
 }
