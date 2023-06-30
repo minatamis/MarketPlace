@@ -59,6 +59,21 @@ namespace Market_Data
             users.Add(newUser);
             Console.WriteLine("User data saved successfully.");
         }
+        public void UpdateUserData(string userName, string userAddress, int userMobile)
+        {
+            UserInfo existingUser = users.Find(u => u.username == userName);
+
+            if (existingUser != null)
+            {
+                existingUser.useraddress = userAddress;
+                existingUser.usermobile = userMobile;
+                Console.WriteLine("User data updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine("User not found.");
+            }
+        }
 
     }
     }
