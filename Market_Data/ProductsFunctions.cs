@@ -11,6 +11,7 @@ namespace Market_Data
     {
         public static List<Products> products = new List<Products>();
 
+        public static List<UserInfo> users = new List<UserInfo>();      
         public static void addProduct(Products prod)
         {
             products.Add(prod);
@@ -46,7 +47,18 @@ namespace Market_Data
             Console.WriteLine($"Reason for Selling: {prod.itemRFS}");
 
         }
+        public void Save(string username, string userAddress, string userMobile)
+        {
+            UserInfo newUser = new UserInfo
+            {
+                userName = username,
+                UserAddress = userAddress,
+                UserMobile = userMobile
+            };
 
+            users.Add(newUser);
+            Console.WriteLine("User data saved successfully.");
+        }
     }
 
 }

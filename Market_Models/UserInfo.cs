@@ -12,6 +12,9 @@ namespace Market_Models
         public string userAddress;
         public int userMobile;
 
+        public string UserAddress { get; set; }
+        public string UserMobile { get; set; }
+
     }
 
 }
