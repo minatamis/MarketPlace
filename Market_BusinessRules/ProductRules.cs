@@ -22,11 +22,6 @@ namespace Market_BusinessRules
 
         }
 
-        public static void editProduct(ProductsInfo prod)
-        {
-           // not yet finished need help ma'am 
-        }
-
         public static ProductsInfo retrieveProduct(string prod)
         {
             foreach (var product in ProductDataServices.products)
@@ -46,7 +41,7 @@ namespace Market_BusinessRules
         public static string getProducts(ProductsInfo prod)
         {
             string productInfo = "";
-            
+
             productInfo += $"Item Name: {prod.itemName}\n";
             productInfo += $"Price: {prod.itemPrice}\n";
             productInfo += $"Category: {prod.itemCategory} \n";
@@ -57,7 +52,41 @@ namespace Market_BusinessRules
 
         }
 
+        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
+        {
+            ProductsInfo newProduct = new ProductsInfo
+            {
+                itemName = itemname,
+                itemPrice = itemprice,
+                itemCategory = itemcategory,
+                itemDescription = itemdescription,
+                itemRFS = itemRFS
+            };
 
+            addProduct(newProduct);
+
+        }
+        public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
+        {
+            ProductsInfo existingProduct = retrieveProduct(itemname);
+
+            if (existingProduct != null)
+            {
+                existingProduct.itemPrice = itemprice;
+                existingProduct.itemCategory = itemcategory;
+                existingProduct.itemDescription = itemdescription;
+                existingProduct.itemRFS = ItemRFS;
+
+                return existingProduct;
+
+            }
+            else
+            {
+                return null;
+
+            }
+
+        }
 
     }
 }
