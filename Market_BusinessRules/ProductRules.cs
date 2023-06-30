@@ -27,21 +27,20 @@ namespace Market_BusinessRules
            // not yet finished need help ma'am 
         }
 
-
-        public static bool checkProductExistence(string prod)
+        public static ProductsInfo retrieveProduct(string prod)
         {
             foreach (var product in ProductDataServices.products)
             {
                 if (product.itemName.Contains(prod))
                 {
-                    return true;
+                    return product;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
-            return false;
+            return null;
         }
 
         public static string getProducts(ProductsInfo prod)

@@ -116,10 +116,10 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            if(ProductRules.checkProductExistence(product))
+            if (ProductRules.retrieveProduct(product) != null)
             {
-                ProductsInfo removeProd = new ProductsInfo();
-                //ProductsFunctions.removeProduct();
+                ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
+                ProductRules.removeProduct(prodToDelete);
                 Console.WriteLine("Product has been removed.");
 
             }
@@ -140,7 +140,7 @@ namespace Market_UI
             Console.Write("Enter the name of the product to Edit: ");
             string itemName = Console.ReadLine();
 
-           // ProductsInfo newprod = ProductDataServices.products.Find(p => p.itemName == itemName);
+            ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
 
             if (newprod == null)
             {
