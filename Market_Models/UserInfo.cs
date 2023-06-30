@@ -12,6 +12,10 @@ namespace Market_Models
         public string UserAddress { get; set; }
         public string UserMobile { get; set; }
 
+        public static UserInfo Find(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
