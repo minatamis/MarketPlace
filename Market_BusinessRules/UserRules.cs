@@ -29,6 +29,18 @@ namespace Market_BusinessRules
             }
             return null;
         }
+        public void SaveUserData(string userName, string userAddress, String userEmail, int userMobile)
+        {
+            UserInfo newUser = new UserInfo
+            {
+                username = userName,
+                useraddress = userAddress,
+                userEmail = userEmail,
+                usermobile = userMobile
+            };
 
+            UserDataServices.users.Add(newUser);
+
+        }
     }
 }
