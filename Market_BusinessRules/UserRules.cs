@@ -26,5 +26,22 @@ namespace Market_BusinessRules
             }
             return null;
         }
+        public UserInfo UpdateUserData(string userName, string userAddress, string userEmail, int userMobile)
+        {
+            UserInfo existingUser = retrieveUser(userName);
+
+            if (existingUser != null)
+            {
+                existingUser.useraddress = userAddress;
+                existingUser.useremail = userEmail;
+                existingUser.usermobile = userMobile;
+
+                return existingUser;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
