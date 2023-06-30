@@ -10,12 +10,8 @@ namespace Market_Models
     {
         public string username { get; set; }
         public string useraddress { get; set; }
+        public string useremail { get; set; }
         public int usermobile { get; set; }
-
-        public static UserInfo Find(Func<object, bool> value)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 

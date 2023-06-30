@@ -1,17 +1,17 @@
-﻿using Market_Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market_Models;
-using Market_Data;
+using Market_BusinessRules;
+using System.Collections.Concurrent;
 
 namespace Market_UI
 {
     public class MarketFunctions
     {
-        public static void ViewProducts(List<Products> products)
+        public static void ViewProducts(List<ProductsInfo> products)
         {
             Console.Clear();
             Console.WriteLine("Products:");
@@ -24,14 +24,17 @@ namespace Market_UI
             }
             else
             {
-                int index = 1;
+                Console.WriteLine("Products: ");
                 foreach (var product in products)
                 {
-                    Console.WriteLine($"{index})");
-                    ProductsFunctions.displayProducts(product);
+                    
+                    string productInfo = ProductRules.getProducts(product);
+                    Console.WriteLine(productInfo);
 
-                    index++;
+                    TimeSpan timeSinceAdded = DateTime.Now - product.TimeAdded;
+                    string timeAgo = GetTimeAgoString(timeSinceAdded);
 
+                    Console.WriteLine($"Posted {timeAgo} ago");
                 }
 
                 //Console.WriteLine("\nSelect a product number to add to cart (0 to cancel): ");
@@ -73,15 +76,18 @@ namespace Market_UI
                     Console.Write("Enter your reason for selling: ");
                     string rfs = Console.ReadLine();
 
-                    Products addProd = new Products
+                    DateTime timeAdded = DateTime.Now;
+
+                    ProductsInfo addProd = new ProductsInfo
                     {
                         itemName = product,
                         itemPrice = price,
                         itemCategory = category,
                         itemDescription = description,
-                        itemRFS = rfs
+                        itemRFS = rfs,
+                        TimeAdded = timeAdded
                     };
-                    ProductsFunctions.addProduct(addProd);
+                    ProductRules.addProduct(addProd);
 
                     //products.Add(product, (price, description));
                     Console.WriteLine("Product has been added.");
@@ -110,12 +116,10 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string product = Console.ReadLine();
 
-            var productSearched = ProductsFunctions.searchProduct(product);
-
-            if (productSearched != null)
+            if (ProductRules.retrieveProduct(product) != null)
             {
-                productSearched.itemCategory
-                //ProductsFunctions.removeProduct(product);
+                ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
+                ProductRules.removeProduct(prodToDelete);
                 Console.WriteLine("Product has been removed.");
 
             }
@@ -127,5 +131,70 @@ namespace Market_UI
 
         }
 
+        public static void EditProduct()
+        {
+            Console.Clear();
+            Console.WriteLine("Edit Product:");
+            Console.WriteLine("**************************");
+
+            Console.Write("Enter the name of the product to Edit: ");
+            string itemName = Console.ReadLine();
+
+            ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
+
+            if (newprod == null)
+            {
+                Console.WriteLine("Product not found.");
+                return;
+
+            }
+            else
+            {
+                Console.WriteLine("Enter the new item name: ");
+                newprod.itemName = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item price:");
+                newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Enter the new item category:");
+                newprod.itemCategory = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item description:");
+                newprod.itemDescription = Console.ReadLine();
+
+                Console.WriteLine("Enter the new reason for selling:");
+                newprod.itemRFS = Console.ReadLine();
+
+                Console.WriteLine("Product edited successfully!");
+            }
+
+
+        }
+
+        static string GetTimeAgoString(TimeSpan timeSpan)
+        {
+            if (timeSpan.TotalSeconds < 60)
+            {
+                return $"{Convert.ToInt32(Math.Round(timeSpan.TotalSeconds))} seconds";
+            }
+            else if (timeSpan.TotalMinutes < 60)
+            {
+                return $"{Math.Round(timeSpan.TotalMinutes)} minutes";
+            }
+            else if (timeSpan.TotalHours < 24)
+            {
+                return $"{Math.Round(timeSpan.TotalHours)} hours";
+            }
+            else
+            {
+                return $"{Convert.ToInt32(Math.Round(timeSpan.TotalDays))} days";
+            }
+        }
     }
-}
+
+
+ }
+
+       
+    
+

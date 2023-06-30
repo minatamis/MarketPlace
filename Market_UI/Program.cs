@@ -7,7 +7,7 @@ namespace MarketPlace
 {
     class Program
     {
-        static List<string> cart = new List<string>();
+        //static List<string> cart = new List<string>();
         static DateTime gettime = DateTime.Now;
         static void Main(string[] args)
         {
@@ -36,7 +36,7 @@ namespace MarketPlace
                 switch (choice)
                 {
                     case "1"://unfinished
-                        MarketFunctions.ViewProducts(ProductsFunctions.products);
+                        MarketFunctions.ViewProducts(ProductDataServices.products);
 
                         break;
 
@@ -45,18 +45,18 @@ namespace MarketPlace
 
                         break;
 
-                    case "3"://unfinished
+                    case "3":
                         MarketFunctions.RemoveProduct();
 
                         break;
 
                     case "4":
-                        //to follow
+                        MarketFunctions.EditProduct();
 
                         break;
 
                     case "5":
-                        ViewCart();
+                        //ViewCart();
 
                         break;
 
@@ -116,29 +116,29 @@ namespace MarketPlace
         }*/
 
 
-        static void ViewCart()
-        {
-            Console.Clear();
-            Console.WriteLine("Cart:");
-            Console.WriteLine("===========================");
+        //static void ViewCart()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Cart:");
+        //    Console.WriteLine("===========================");
 
-            if (cart.Count == 0)
-            {
-                Console.WriteLine("Cart is empty.");
-            }
-            else
-            {
-                int index = 1;
-                foreach (string product in cart)
-                {
-                    Console.WriteLine("{0}. {1}", index, product);
-                    index++;
+        //    if (cart.Count == 0)
+        //    {
+        //        Console.WriteLine("Cart is empty.");
+        //    }
+        //    else
+        //    {
+        //        int index = 1;
+        //        foreach (string product in cart)
+        //        {
+        //            Console.WriteLine("{0}. {1}", index, product);
+        //            index++;
 
-                }
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
 
     }
 
