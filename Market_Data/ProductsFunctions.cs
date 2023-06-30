@@ -86,8 +86,7 @@ namespace Market_Data
             };
 
             products.Add(newProduct);
-            Console.WriteLine("Products data saved successfully.");
+            Console.WriteLine("Product data saved successfully.");
         }
-
     }
-    }
+}
