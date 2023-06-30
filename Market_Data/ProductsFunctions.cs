@@ -74,6 +74,20 @@ namespace Market_Data
                 Console.WriteLine("User not found.");
             }
         }
+        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
+        {
+            Products newProduct = new Products
+            {
+                itemName = itemname,
+                itemPrice = itemprice,
+                itemCategory = itemcategory,
+                itemDescription = itemdescription,
+                itemRFS = itemRFS
+            };
+
+            products.Add(newProduct);
+            Console.WriteLine("Products data saved successfully.");
+        }
 
     }
     }
