@@ -47,33 +47,18 @@ namespace Market_Data
             Console.WriteLine($"Reason for Selling: {prod.ItemRFS}");
 
         }
-        public void SaveUserData(string username, string userAddress, string userMobile)
+        public void SaveUserData(string userName, string userAddress, int userMobile)
         {
             UserInfo newUser = new UserInfo
             {
-                UserName = username,
-                UserAddress = userAddress,
-                UserMobile = userMobile
+                username = userName,
+                useraddress = userAddress,
+                usermobile = userMobile
             };
 
             users.Add(newUser);
             Console.WriteLine("User data saved successfully.");
         }
-        public void UpdateUserData(string username, string userAddress, string userMobile)
-        {
-            UserInfo existingUser = users.Find(u => u.UserName == username);
 
-            if (existingUser != null)
-            {
-                existingUser.UserAddress = userAddress;
-                existingUser.UserMobile = userMobile;
-                Console.WriteLine("User data updated successfully.");
-            }
-            else
-            {
-                Console.WriteLine("User not found.");
-            }
-        }
     }
-
-}
+    }
