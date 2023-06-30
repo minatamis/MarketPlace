@@ -2,12 +2,12 @@
 {
     public class ProductsInfo
     {
-        public string itemName;
-        public double itemPrice;
-        public string itemCategory;
-        public string itemDescription;
-        public string itemRFS;
-        public DateTime TimeAdded;
+        public string itemName { get; set; }
+        public double itemPrice { get; set; }
+        public string itemCategory { get; set; }
+        public string itemDescription { get; set; }
+        public string itemRFS { get; set; }
+        public DateTime TimeAdded { get; set; }
 
     }
 

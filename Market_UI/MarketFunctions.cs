@@ -85,7 +85,7 @@ namespace Market_UI
                         itemCategory = category,
                         itemDescription = description,
                         itemRFS = rfs,
-                        TimeAdded= timeAdded
+                        TimeAdded = timeAdded
                     };
                     ProductRules.addProduct(addProd);
 

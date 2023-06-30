@@ -45,7 +45,7 @@ namespace MarketPlace
 
                         break;
 
-                    case "3"://unfinished
+                    case "3":
                         MarketFunctions.RemoveProduct();
 
                         break;
