@@ -18,7 +18,7 @@ namespace Market_Data
 
         }
         public static void removeProduct(Products prod)
-        {prod.
+        {
 
             products.Remove(prod);
 
@@ -44,14 +44,14 @@ namespace Market_Data
             Console.WriteLine($"Price: {prod.itemPrice}");
             Console.WriteLine($"Category: {prod.itemCategory}");
             Console.WriteLine($"Description: {prod.itemDescription}");
-            Console.WriteLine($"Reason for Selling: {prod.itemRFS}");
+            Console.WriteLine($"Reason for Selling: {prod.ItemRFS}");
 
         }
-        public void Save(string username, string userAddress, string userMobile)
+        public void SaveUserData(string username, string userAddress, string userMobile)
         {
             UserInfo newUser = new UserInfo
             {
-                userName = username,
+                UserName = username,
                 UserAddress = userAddress,
                 UserMobile = userMobile
             };
