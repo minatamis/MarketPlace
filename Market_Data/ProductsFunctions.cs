@@ -44,7 +44,7 @@ namespace Market_Data
             Console.WriteLine($"Price: {prod.itemPrice}");
             Console.WriteLine($"Category: {prod.itemCategory}");
             Console.WriteLine($"Description: {prod.itemDescription}");
-            Console.WriteLine($"Reason for Selling: {prod.ItemRFS}");
+            Console.WriteLine($"Reason for Selling: {prod.itemRFS}");
 
         }
         public void SaveUserData(string userName, string userAddress, int userMobile)
@@ -87,6 +87,24 @@ namespace Market_Data
 
             products.Add(newProduct);
             Console.WriteLine("Product data saved successfully.");
+        }
+        public void UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
+        {
+            Products existingProduct = products.Find(p => p.itemName == itemname);
+
+            if (existingProduct != null)
+            {
+                existingProduct.itemPrice = itemprice;
+                existingProduct.itemCategory = itemcategory;
+                existingProduct.itemDescription = itemdescription;
+                existingProduct.itemRFS = ItemRFS;
+
+                Console.WriteLine("Product data updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Product not found.");
+            }
         }
     }
 }
