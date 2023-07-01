@@ -52,7 +52,7 @@ namespace Market_BusinessRules
 
         }
 
-        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
+        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS, DateTime timeAdded)
         {
             ProductsInfo newProduct = new ProductsInfo
             {
@@ -60,7 +60,8 @@ namespace Market_BusinessRules
                 itemPrice = itemprice,
                 itemCategory = itemcategory,
                 itemDescription = itemdescription,
-                itemRFS = itemRFS
+                itemRFS = itemRFS,
+                TimeAdded = timeAdded
             };
 
             addProduct(newProduct);
