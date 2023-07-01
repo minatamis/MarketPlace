@@ -66,7 +66,7 @@ namespace Market_BusinessRules
             addProduct(newProduct);
 
         }
-        public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
+        public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS, DateTime timeAdded)
         {
             ProductsInfo existingProduct = retrieveProduct(itemname);
 
@@ -76,6 +76,7 @@ namespace Market_BusinessRules
                 existingProduct.itemCategory = itemcategory;
                 existingProduct.itemDescription = itemdescription;
                 existingProduct.itemRFS = ItemRFS;
+                existingProduct.TimeAdded = timeAdded;
 
                 return existingProduct;
 
