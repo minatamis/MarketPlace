@@ -12,8 +12,6 @@ namespace MarketPlace
         static void Main(string[] args)
         {
             MarketFunctions marketOverview = new MarketFunctions();
-            // Initialize a list to hold the products, prices, and descriptions
-            //Dictionary<string, (double Price, string Description)> products = new Dictionary<string, (double Price, string Description)>();
 
             // Display the main menu and wait for user input
             while (true)

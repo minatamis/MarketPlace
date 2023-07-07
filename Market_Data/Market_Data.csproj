@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Market_Models\Market_Models.csproj" />
   </ItemGroup>
 
