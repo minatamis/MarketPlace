@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market_Models
 {
-    internal class Cart
+    public class Cart
     {
         public string itemName { get; set; }
         public double itemPrice { get; set; }
