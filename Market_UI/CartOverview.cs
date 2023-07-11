@@ -11,6 +11,52 @@ namespace Market_UI
 {
     public class CartOverview
     {
+        public static void AddToCartFunc()
+        {
+            Console.Clear();
+            Console.WriteLine("Add Product to Cart");
+
+            Console.WriteLine("************");
+
+            Console.WriteLine("Name of product to add: ");
+            string selectedproduct = Console.ReadLine();
+
+            if (CartRules.retrieveProductCart(selectedproduct) != null)
+            {
+                CartRules selectedProdToAdd = CartRules.retrieveProductCart(selectedproduct);
+                CartRules.addProductToCart(selectedProdToAdd);
+                Console.WriteLine("Product has been added to cart.");
+            }
+            else
+            {
+                Console.WriteLine("Product cannot be found.")
+            }
+        }
+        public static void RemoveToCartFunc()
+        {
+            Console.Clear();
+            Console.WriteLine("Remove Product to Cart:");
+            Console.WriteLine("**************************");
+
+            Console.Write("Enter the name of the product to remove from cart: ");
+            string selectedProduct = Console.ReadLine();
+
+            if (CartRules.retrieveProductCart(selectedProduct) != null)
+            {
+                CartRules selectedProdToDelete = CartRules.retrieveProductCart(selectedProduct);
+                CartRules.removeProductToCart(selectedProdToDelete);
+                Console.WriteLine("Product has been removed.");
+
+            }
+            else
+            {
+                Console.WriteLine("Product is not available.");
+
+            }
+
+        }
+        Write to Eunice Stephanie Emata
+
         public static void GetUser()
         {
             Console.Clear();
