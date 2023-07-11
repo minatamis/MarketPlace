@@ -55,7 +55,7 @@ namespace Market_UI
             }
 
         }
-        Write to Eunice Stephanie Emata
+
 
         public static void GetUser()
         {
