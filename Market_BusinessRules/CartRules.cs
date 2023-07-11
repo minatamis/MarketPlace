@@ -14,6 +14,21 @@ namespace Market_BusinessRules
             {
                 CartDataServices.cartItems.Add(cart);
             }
+        public static Cart retrieveProductCart(string cartProd)
+        {
+            foreach (var product in CartDataServices.cartItems)
+            {
+                if (product.itemName.Contains(cartProd))
+                {
+                    return product;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
 
     }
 }
