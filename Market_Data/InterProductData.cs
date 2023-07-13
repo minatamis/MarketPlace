@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Market_Data
+namespace MarketDataServices
 {
     public interface InterProductData
     {

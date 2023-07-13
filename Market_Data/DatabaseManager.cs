@@ -1,4 +1,5 @@
 ﻿using Market_Models;
+using Market_Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,24 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Market_Data
+namespace MarketDataServices
 {
     public class DatabaseManager : InterProductData
     {
-        private string connectionString = "Data Source = MYOUI\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        private string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlace;Integrated Security = True;";
 
         static SqlConnection sqlConnection;
 
+        public ProductDataServices productDataServices= new ProductDataServices();
+
         public DatabaseManager() 
         {
-            sqlConnections = new SqlConnection(connectionString);
+            sqlConnection = new SqlConnection(connectionString);
         }
 
         public List<ProductsInfo> products()
         {
-            var selectStatement = "Select * From Products";
-            SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnections);
-            SqlConnection.Open();
+            var selectStatement = "Select * From ProductsInfo";
+            SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection); 
+            sqlConnection.Open();
             SqlDataReader reader = selectCommand.ExecuteReader();
 
             var productsInfo = new List<ProductsInfo>();
@@ -33,16 +36,17 @@ namespace Market_Data
             {
                 productsInfo.Add(new ProductsInfo
                 {
-                    itemName = ProductDataServices.retrieveProduct(reader["Name"].ToString()),
-                    itemPrice = Convert.ToInt16(reader["Price"])
-                    //itemCategory
+                    itemName = reader["itemName"].ToString(),
+                    itemPrice = Convert.ToInt16(reader["itemPrice"]),
+                    //itemCategory = reader["itemCategory"].ToString()
                 });
             }
 
             sqlConnection.Close();
 
-            return null;
+            return productsInfo;
         }
+
 
         public void saveProducts(List<ProductsInfo> products)
         {
