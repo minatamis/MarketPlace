@@ -11,26 +11,27 @@ namespace Market_Data
     {
         public static List<ProductsInfo> products;
 
-        public ProductDataServices() 
+        public ProductDataServices()
         {
             products = new List<ProductsInfo>();
 
-        
+
         }
-        public static ProductsInfo retrieveProduct(string prod)
+        public static List<ProductsInfo> getProduct()
         {
-            foreach (var product in ProductDataServices.products)
+            return products;
+        }
+        public static ProductsInfo getProduct(string prod)
+        {
+            ProductsInfo foundProd = new ProductsInfo();
+            foreach (var item in products)
             {
-                if (product.itemName.Contains(prod))
+                if (item.itemName == prod)
                 {
-                    return product;
-                }
-                else
-                {
-                    return null;
+                    foundProd = item;
                 }
             }
-            return null;
+            return foundProd;
         }
 
     }

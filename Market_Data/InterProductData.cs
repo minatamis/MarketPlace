@@ -9,7 +9,7 @@ namespace MarketDataServices
 {
     public interface InterProductData
     {
-        List<ProductsInfo> products();
+        List<ProductsInfo> getProductsInfo();
         void saveProducts(List<ProductsInfo> products);
         void updateProducts(ProductsInfo products);
 
