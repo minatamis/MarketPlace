@@ -25,7 +25,7 @@ namespace MarketDataServices
 
         public List<ProductsInfo> products()
         {
-            var selectStatement = "Select * From ProductsInfo";
+            var selectStatement = "SELECT * FROM dbo.ProductsInfo";
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection); 
             sqlConnection.Open();
             SqlDataReader reader = selectCommand.ExecuteReader();
@@ -36,15 +36,18 @@ namespace MarketDataServices
             {
                 productsInfo.Add(new ProductsInfo
                 {
-                    itemName = reader["itemName"].ToString(),
+                    itemName = productDataServices.retrieveProduct(reader["itemName"].ToString()),
                     itemPrice = Convert.ToInt16(reader["itemPrice"]),
-                    //itemCategory = reader["itemCategory"].ToString()
+                    //itemCategory = productDataServices.retrieveProduct(reader["itemCategorry"].ToString()),
+                    //itemDescription = productDataServices.retrieveProduct(reader["itemDescription"].ToString()),
+                    //itemRFS = productDataServices.retrieveProduct(reader["itemRFS"].ToString()),
+                    //TimeAdded = productDataServices.retrieveProduct(reader["TimeAdded"].ToString()),
                 });
             }
 
             sqlConnection.Close();
 
-            return productsInfo;
+            return null;
         }
 
 
