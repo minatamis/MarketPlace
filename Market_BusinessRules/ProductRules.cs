@@ -11,30 +11,41 @@ namespace Market_BusinessRules
 {
     public class ProductRules
     {
+        ProductDataServices productDataServices;
+        public ProductRules()
+        {
+            productDataServices = new ProductDataServices();
+        }
         public static void addProduct(ProductsInfo prod)
         {
-            ProductDataServices.products.Add(prod);
+            //ProductDataServices.products.Add(prod);
 
+        }
+
+        public List<ProductsInfo> ViewProducts()
+        {
+            return productDataServices.retrieveProducts();
         }
         public static void removeProduct(ProductsInfo prod)
         {
-            ProductDataServices.products.Remove(prod);
+            ///*ProductDataServices*/.products.Remove(prod);
 
         }
 
         public static ProductsInfo retrieveProduct(string prod)
         {
-            foreach (var product in ProductDataServices.products)
-            {
-                if (product.itemName.Contains(prod))
-                {
-                    return product;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            //var products  = productDataServices.retrieveProduct(
+            //foreach (var product in ProductDataServices.products)
+            //{
+            //    if (product.itemName.Contains(prod))
+            //    {
+            //        return product;
+            //    }
+            //    else
+            //    {
+            //        return null;
+            //    }
+            //}
             return null;
         }
 

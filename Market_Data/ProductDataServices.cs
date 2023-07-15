@@ -4,22 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market_Models;
+using MarketDataServices;
 
 namespace Market_Data
 {
     public class ProductDataServices
     {
-        public static List<ProductsInfo> products;
+        public List<ProductsInfo> products = new List<ProductsInfo>();
+        DatabaseManager productdata;
 
         public ProductDataServices() 
         {
+            productdata = new DatabaseManager();
             products = new List<ProductsInfo>();
-
-        
+     
         }
-        public static ProductsInfo retrieveProduct(string prod)
+        public ProductsInfo retrieveProduct(string prod)
         {
-            foreach (var product in ProductDataServices.products)
+            products = productdata.products();
+
+            foreach (var product in products)
             {
                 if (product.itemName.Contains(prod))
                 {
@@ -31,6 +35,11 @@ namespace Market_Data
                 }
             }
             return null;
+        }
+        
+        public List<ProductsInfo> retrieveProducts()
+        {
+           return productdata.products();
         }
 
     }

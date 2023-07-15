@@ -12,11 +12,11 @@ namespace MarketDataServices
 {
     public class DatabaseManager : InterProductData
     {
-        private string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlace;Integrated Security = True;";
+        private string connectionString = "Data Source = DESKTOP-UTJ2GI1\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
 
         static SqlConnection sqlConnection;
 
-        public ProductDataServices productDataServices= new ProductDataServices();
+        //public ProductDataServices productDataServices= new ProductDataServices();
 
         public DatabaseManager() 
         {
@@ -25,10 +25,11 @@ namespace MarketDataServices
 
         public List<ProductsInfo> products()
         {
-            var selectStatement = "SELECT * FROM dbo.ProductsInfo";
+            var selectStatement = "SELECT * FROM dbo.Products";
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection); 
             sqlConnection.Open();
             SqlDataReader reader = selectCommand.ExecuteReader();
+            //ProductDataServices productDataServices = new ProductDataServices();
 
             var productsInfo = new List<ProductsInfo>();
 
@@ -36,7 +37,7 @@ namespace MarketDataServices
             {
                 productsInfo.Add(new ProductsInfo
                 {
-                    itemName = productDataServices.retrieveProduct(reader["itemName"].ToString()),
+                    itemName = reader["itemName"].ToString(),
                     itemPrice = Convert.ToInt16(reader["itemPrice"]),
                     //itemCategory = productDataServices.retrieveProduct(reader["itemCategorry"].ToString()),
                     //itemDescription = productDataServices.retrieveProduct(reader["itemDescription"].ToString()),
@@ -47,7 +48,7 @@ namespace MarketDataServices
 
             sqlConnection.Close();
 
-            return null;
+            return productsInfo;
         }
 
 
@@ -60,5 +61,7 @@ namespace MarketDataServices
         {
             
         }
+
+
     }
 }
