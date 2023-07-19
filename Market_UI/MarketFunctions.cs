@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 using Market_Models;
 using Market_BusinessRules;
 using System.Collections.Concurrent;
+using MarketDataServices;
+using System.Drawing.Text;
+using Microsoft.VisualBasic;
 
 namespace Market_UI
 {
     public class MarketFunctions
     {
+        private readonly ProductRules productRules;
+
+        public MarketFunctions(DatabaseManager database)
+        {
+            this.productRules = new ProductRules();
+        }
+
         public static void ViewProducts()
         {
             Console.Clear();
@@ -35,45 +45,15 @@ namespace Market_UI
                     Console.WriteLine("Category: " + item.itemCategory);
                     Console.WriteLine("Description: " + item.itemDescription);
                     Console.WriteLine("Reason for Selling: " + item.itemRFS);
+
+
+                    TimeSpan timeSinceAdded = DateTime.Now - item.TimeAdded;
+                    string timeAgo = GetTimeAgoString(timeSinceAdded);
+
+                    Console.WriteLine($"Posted {timeAgo} ago");
                 }
 
             }
-            //Console.Clear();
-            //Console.WriteLine("Products:");
-            //Console.WriteLine("**************************");
-
-            //if (products.Count == 0)
-            //{
-            //    Console.WriteLine("There is no product available at the moment.");
-
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Products: ");
-            //    foreach (var product in products)
-            //    {
-
-            //        string productInfo = ProductRules.getProducts(product);
-            //        Console.WriteLine(productInfo);
-
-            //        TimeSpan timeSinceAdded = DateTime.Now - product.TimeAdded;
-            //        string timeAgo = GetTimeAgoString(timeSinceAdded);
-
-            //        Console.WriteLine($"Posted {timeAgo} ago");
-
-            //Console.WriteLine("\nSelect a product number to add to cart (0 to cancel): ");
-            //int productNumber;
-            //if (int.TryParse(Console.ReadLine(), out productNumber) && productNumber >= 1 && productNumber <= products.Count)
-            //{
-            //    string selectedProduct = products.Keys.ElementAt(productNumber - 1);
-            //    cart.Add(selectedProduct);
-            //    Console.WriteLine("Product '{0}' added to cart.", selectedProduct);
-            //}
-            //else if (productNumber != 0)
-            //{
-            //    Console.WriteLine("Invalid product number.");
-            //}
-
 
 
 
@@ -81,57 +61,45 @@ namespace Market_UI
         }
         public static void AddProduct()
         {
+            ProductRules productRules = new ProductRules();
             Console.Clear();
             Console.WriteLine("Add Product:");
             Console.WriteLine("*************************");
 
 
+            Console.Write("enter the name of the product: ");
+            string name = Console.ReadLine();
 
+            if (!string.IsNullOrEmpty(name))
+            {
+                Console.Write("enter the price of the product: php");
+                if (double.TryParse(Console.ReadLine(), out double price))
+                {
+                    Console.Write("enter the description of the product: ");
+                    string desc = Console.ReadLine();
+                    Console.Write("enter the category of the product: ");
+                    string category = Console.ReadLine();
+                    Console.Write("enter your reason for selling: ");
+                    string rfs = Console.ReadLine();
 
-            //Console.Write("Enter the name of the product: ");
-            //string product = Console.ReadLine();
+                    DateTime TimeAdded = DateTime.Now;
 
-            //if (!string.IsNullOrEmpty(product))
-            //{
-            //    Console.Write("Enter the price of the product: PHP");
-            //    if (double.TryParse(Console.ReadLine(), out double price))
-            //    {
-            //        Console.Write("Enter the description of the product: ");
-            //        string description = Console.ReadLine();
-            //        Console.Write("Enter the category of the product: ");
-            //        string category = Console.ReadLine();
-            //        Console.Write("Enter your reason for selling: ");
-            //        string rfs = Console.ReadLine();
+                    productRules.addProduct(name, price, desc, category, rfs, TimeAdded);
+                }
+                else
+                {
+                    Console.WriteLine("price not applicable.");
 
-            //        DateTime timeAdded = DateTime.Now;
+                }
 
-            //        ProductsInfo addProd = new ProductsInfo
-            //        {
-            //            itemName = product,
-            //            itemPrice = price,
-            //            itemCategory = category,
-            //            itemDescription = description,
-            //            itemRFS = rfs,
-            //            TimeAdded = timeAdded
-            //        };
-            //        ProductRules.addProduct(addProd);
+            }
+            else
+            {
+                Console.WriteLine("product name cannot be empty.");
 
-            //        //products.Add(product, (price, description));
-            //        Console.WriteLine("Product has been added.");
+            }
 
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Price not applicable.");
-
-            //    }
-
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Product name cannot be empty.");
-
-            //}
+           
 
         }
         //public static void RemoveProduct()

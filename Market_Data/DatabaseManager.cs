@@ -12,8 +12,10 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        
         static SqlConnection sqlConnection;
+
         public DatabaseManager()
         {
             sqlConnection = new SqlConnection(connectionString);
@@ -41,17 +43,18 @@ namespace MarketDataServices
 
             return prodList;
         }
-        public void InsertProduct(ProductsInfo productsInfo)
+        public void InsertProduct(ProductsInfo prodInfo)
         {
-            string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS)";
+            
+            string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS, @TimeAdded)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
-            sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
-            sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
-            sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
-            sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
-            sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
+            sqlCommand.Parameters.AddWithValue("@itemName", prodInfo.itemName);
+            sqlCommand.Parameters.AddWithValue("@itemPrice", prodInfo.itemPrice);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", prodInfo.itemCategory);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", prodInfo.itemDescription);
+            sqlCommand.Parameters.AddWithValue("@itemRFS", prodInfo.itemRFS);
+            sqlCommand.Parameters.AddWithValue("@TimeAdded", prodInfo.TimeAdded);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -75,7 +78,7 @@ namespace MarketDataServices
                     itemCategory = sqlDataReader["itemCategory"].ToString(),
                     itemDescription = sqlDataReader["itemDescription"].ToString(),
                     itemRFS = sqlDataReader["itemRFS"].ToString(),
-                    TimeAdded = DateTime.Now
+                    TimeAdded = Convert.ToDateTime(sqlDataReader["TimeAdded"])
 
                 });
             }

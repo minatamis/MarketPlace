@@ -21,7 +21,8 @@ namespace Market_BusinessRules
         {
             return productDataServices.retrieveProducts();
         }
-        public void addProduct(string name, double price, string category, string desc, string rfs)
+
+        public void addProduct(string name, double price, string category, string desc, string rfs, DateTime TimeAdded)
         {
             ProductsInfo prodInfo = new ProductsInfo
             {
@@ -29,10 +30,12 @@ namespace Market_BusinessRules
                 itemPrice = price,
                 itemCategory = category,
                 itemDescription = desc,
-                itemRFS = rfs
+                itemRFS = rfs,
+                TimeAdded = DateTime.Now
             };
             productDataServices.addProducts(prodInfo);
         }
+
         public void removeProduct(string productName)
         {
             productDataServices.removeProducts(productName);
