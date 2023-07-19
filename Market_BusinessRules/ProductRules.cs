@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Market_Data;
 using Market_Models;
@@ -12,25 +11,10 @@ namespace Market_BusinessRules
 {
     public class ProductRules
     {
-        ProductDataServices productDataServices = new ProductDataServices();
+        ProductDataServices productDataServices;
         public ProductRules()
         {
             productDataServices = new ProductDataServices();
-        }
-        public void addProduct(string name, double price, string category, string desc, string rfs)
-        {
-            ProductsInfo productsInfo = new ProductsInfo
-            {
-                itemName = name,
-                itemPrice = price,
-                itemCategory    = category,
-                itemDescription = desc,
-                itemRFS = rfs,
-                TimeAdded = DateTime.Now,
-            };
-
-            productDataServices.addProduct(productsInfo);
-
 
         }
 
@@ -38,43 +22,50 @@ namespace Market_BusinessRules
         {
             return productDataServices.retrieveProducts();
         }
-        public static void removeProduct(ProductsInfo prod)
+        public void addProduct(string name, double price, string category, string desc, string rfs)
         {
-            ///*ProductDataServices*/.products.Remove(prod);
+            ProductsInfo prodInfo = new ProductsInfo
+            {
+                itemName = name,
+                itemPrice = price,
+                itemCategory = category,
+                itemDescription = desc,
+                itemRFS = rfs
+            };
+            productDataServices.addProducts(prodInfo);
+        }
+        public void removeProduct(string productName)
+        {
+            productDataServices.removeProducts(productName);
 
         }
 
-        public static ProductsInfo retrieveProduct(string prod)
-        {
-            //var products  = productDataServices.retrieveProduct(
-            //foreach (var product in ProductDataServices.products)
-            //{
-            //    if (product.itemName.Contains(prod))
-            //    {
-            //        return product;
-            //    }
-            //    else
-            //    {
-            //        return null;
-            //    }
-            //}
-            return null;
-        }
-
-
-        //public static string getProducts(ProductsInfo prod)
+        //public List<ProductsInfo> checkProduct(string prod)
         //{
-        //    string productInfo = "";
-
-        //    productInfo += $"Item Name: {prod.itemName}\n";
-        //    productInfo += $"Price: {prod.itemPrice}\n";
-        //    productInfo += $"Category: {prod.itemCategory} \n";
-        //    productInfo += $"Description: {prod.itemDescription} \n";
-        //    productInfo += $"Reason for Selling: {prod.itemRFS} \n";
-
-        //    return productInfo;
-
+        //    var products  = new List<ProductsInfo>();
+        //    foreach (var product in products)
+        //    {
+        //        if (product.itemName.Contains(prod))
+        //        {
+        //            return products;
+        //        }
+        //    }
+        //    return null;
         //}
+
+        public static string getProducts(ProductsInfo prod)
+        {
+            string productInfo = "";
+
+            productInfo += $"Item Name: {prod.itemName}\n";
+            productInfo += $"Price: {prod.itemPrice}\n";
+            productInfo += $"Category: {prod.itemCategory} \n";
+            productInfo += $"Description: {prod.itemDescription} \n";
+            productInfo += $"Reason for Selling: {prod.itemRFS} \n";
+
+            return productInfo;
+
+        }
 
         //public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
         //{
@@ -88,6 +79,27 @@ namespace Market_BusinessRules
         //    };
 
         //    addProduct(newProduct);
+
+        //}
+        //public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
+        //{
+        //    ProductsInfo existingProduct = retrieveProduct(itemname);
+
+        //    if (existingProduct != null)
+        //    {
+        //        existingProduct.itemPrice = itemprice;
+        //        existingProduct.itemCategory = itemcategory;
+        //        existingProduct.itemDescription = itemdescription;
+        //        existingProduct.itemRFS = ItemRFS;
+
+        //        return existingProduct;
+
+        //    }
+        //    else
+        //    {
+        //        return null;
+
+        //    }
 
         //}
 

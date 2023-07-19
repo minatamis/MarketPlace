@@ -134,69 +134,69 @@ namespace Market_UI
             //}
 
         }
-        public static void RemoveProduct()
-        {
-            Console.Clear();
-            Console.WriteLine("Remove Product:");
-            Console.WriteLine("****************************");
+        //public static void RemoveProduct()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Remove Product:");
+        //    Console.WriteLine("****************************");
 
-            Console.Write("Enter the name of the product to remove: ");
-            string product = Console.ReadLine();
+        //    Console.Write("Enter the name of the product to remove: ");
+        //    string product = Console.ReadLine();
 
-            if (ProductRules.retrieveProduct(product) != null)
-            {
-                ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
-                ProductRules.removeProduct(prodToDelete);
-                Console.WriteLine("Product has been removed.");
+        //    if (ProductRules.retrieveProduct(product) != null)
+        //    {
+        //        ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
+        //        ProductRules.removeProduct(prodToDelete);
+        //        Console.WriteLine("Product has been removed.");
 
-            }
-            else
-            {
-                Console.WriteLine("Product is not available.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Product is not available.");
 
-            }
+        //    }
 
-        }
+        //}
 
-        public static void EditProduct()
-        {
-            Console.Clear();
-            Console.WriteLine("Edit Product:");
-            Console.WriteLine("**************************");
+        //public static void EditProduct()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Edit Product:");
+        //    Console.WriteLine("**************************");
 
-            Console.Write("Enter the name of the product to Edit: ");
-            string itemName = Console.ReadLine();
+        //    Console.Write("Enter the name of the product to Edit: ");
+        //    string itemName = Console.ReadLine();
 
-            ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
+        //    ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
 
-            if (newprod == null)
-            {
-                Console.WriteLine("Product not found.");
-                return;
+        //    if (newprod == null)
+        //    {
+        //        Console.WriteLine("Product not found.");
+        //        return;
 
-            }
-            else
-            {
-                Console.WriteLine("Enter the new item name: ");
-                newprod.itemName = Console.ReadLine();
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Enter the new item name: ");
+        //        newprod.itemName = Console.ReadLine();
 
-                Console.WriteLine("Enter the new item price:");
-                newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
+        //        Console.WriteLine("Enter the new item price:");
+        //        newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
 
-                Console.WriteLine("Enter the new item category:");
-                newprod.itemCategory = Console.ReadLine();
+        //        Console.WriteLine("Enter the new item category:");
+        //        newprod.itemCategory = Console.ReadLine();
 
-                Console.WriteLine("Enter the new item description:");
-                newprod.itemDescription = Console.ReadLine();
+        //        Console.WriteLine("Enter the new item description:");
+        //        newprod.itemDescription = Console.ReadLine();
 
-                Console.WriteLine("Enter the new reason for selling:");
-                newprod.itemRFS = Console.ReadLine();
+        //        Console.WriteLine("Enter the new reason for selling:");
+        //        newprod.itemRFS = Console.ReadLine();
 
-                Console.WriteLine("Product edited successfully!");
-            }
+        //        Console.WriteLine("Product edited successfully!");
+        //    }
 
 
-        }
+        //}
 
         static string GetTimeAgoString(TimeSpan timeSpan)
         {

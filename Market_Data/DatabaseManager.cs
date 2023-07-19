@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = JINSEYEWEAR-JCR\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         static SqlConnection sqlConnection;
         public DatabaseManager()
         {
@@ -45,12 +45,13 @@ namespace MarketDataServices
         {
             string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
+
             sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
             sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
             sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
             sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
             sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
-            sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
+            //sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -73,23 +74,30 @@ namespace MarketDataServices
                     itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString()),
                     itemCategory = sqlDataReader["itemCategory"].ToString(),
                     itemDescription = sqlDataReader["itemDescription"].ToString(),
-                    itemRFS = sqlDataReader["itemRFS"].ToString(),
-                    TimeAdded = DateTime.Now
+                    itemRFS = sqlDataReader["itemRFS"].ToString()
 
-                }) ;
+                });
             }
             sqlConnection.Close();
 
             return prodList;
         }
+        public void DeleteProduct(string productsInfo)
+        {
+            string deleteStatement = "DELETE FROM Products WHERE itemName = @itemName";
+            SqlCommand sqlCommand = new SqlCommand(deleteStatement, sqlConnection);
 
+            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo);
 
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
 
-        public void UpdateProductInfo(ProductsInfo productToUpdate)
+        }
+        public void UpdateProductInfos(ProductsInfo productToUpdate)
         {
             //to figure out
         }
-
 
     }
 }
