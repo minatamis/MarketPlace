@@ -22,6 +22,10 @@ namespace MarketPlace
             {
                 Console.WriteLine(item.itemName);
                 Console.WriteLine(item.itemPrice);
+                Console.WriteLine(item.itemCategory);
+                Console.WriteLine(item.itemDescription);
+                Console.WriteLine(item.itemRFS);
+
             }
 
 

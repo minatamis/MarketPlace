@@ -21,7 +21,7 @@ namespace Market_Data
         }
         public ProductsInfo retrieveProduct(string prod)
         {
-            products = productdata.products();
+            products = productdata.GetProduct();
 
             foreach (var product in products)
             {
@@ -39,7 +39,7 @@ namespace Market_Data
         
         public List<ProductsInfo> retrieveProducts()
         {
-           return productdata.products();
+           return productdata.GetProductInfos();
         }
 
     }

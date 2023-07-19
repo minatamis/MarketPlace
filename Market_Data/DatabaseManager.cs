@@ -10,56 +10,80 @@ using System.Threading.Tasks;
 
 namespace MarketDataServices
 {
-    public class DatabaseManager : InterProductData
+    public class DatabaseManager
     {
-        private string connectionString = "Data Source = DESKTOP-UTJ2GI1\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
-
+        static string connectionString = "Data Source = DESKTOP-UTJ2GI1\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         static SqlConnection sqlConnection;
-
-        //public ProductDataServices productDataServices= new ProductDataServices();
-
-        public DatabaseManager() 
+        public DatabaseManager()
         {
             sqlConnection = new SqlConnection(connectionString);
+
         }
-
-        public List<ProductsInfo> products()
+        public List<ProductsInfo> GetProduct()
         {
-            var selectStatement = "SELECT * FROM dbo.Products";
-            SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection); 
+            string selectStatement = "SELECT itemName, itemPrice FROM Products";
+            SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
             sqlConnection.Open();
-            SqlDataReader reader = selectCommand.ExecuteReader();
-            //ProductDataServices productDataServices = new ProductDataServices();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            var productsInfo = new List<ProductsInfo>();
+            var prodList = new List<ProductsInfo>();
 
-            while (reader.Read())
+            while (sqlDataReader.Read())
             {
-                productsInfo.Add(new ProductsInfo
+                prodList.Add(new ProductsInfo
                 {
-                    itemName = reader["itemName"].ToString(),
-                    itemPrice = Convert.ToInt16(reader["itemPrice"]),
-                    //itemCategory = productDataServices.retrieveProduct(reader["itemCategorry"].ToString()),
-                    //itemDescription = productDataServices.retrieveProduct(reader["itemDescription"].ToString()),
-                    //itemRFS = productDataServices.retrieveProduct(reader["itemRFS"].ToString()),
-                    //TimeAdded = productDataServices.retrieveProduct(reader["TimeAdded"].ToString()),
+                    itemName = sqlDataReader["itemName"].ToString(),
+                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString())
+
                 });
             }
-
             sqlConnection.Close();
 
-            return productsInfo;
+            return prodList;
+        }
+        public void AddProduct(ProductsInfo productsInfo)
+        {
+            string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS)";
+            SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
+            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
+            sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
+            sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+        public List<ProductsInfo> GetProductInfos()
+        {
+            string selectStatement = "SELECT * FROM Products";
+            SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            var prodList = new List<ProductsInfo>();
+
+            while (sqlDataReader.Read())
+            {
+                prodList.Add(new ProductsInfo
+                {
+                    itemName = sqlDataReader["itemName"].ToString(),
+                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString()),
+                    itemCategory = sqlDataReader["itemCategory"].ToString(),
+                    itemDescription = sqlDataReader["itemDescription"].ToString(),
+                    itemRFS = sqlDataReader["itemRFS"].ToString()
+
+                });
+            }
+            sqlConnection.Close();
+
+            return prodList;
         }
 
-
-        public void saveProducts(List<ProductsInfo> products)
+        public void UpdateProductInfo(ProductsInfo productToUpdate)
         {
-            
-        }
-
-        public void updateProducts(ProductsInfo products)
-        {
-            
+            //to figure out
         }
 
 
