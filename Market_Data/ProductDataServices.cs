@@ -49,6 +49,10 @@ namespace Market_Data
         {
             productData.InsertProduct(product);
         }
+        public void updateProducts(ProductsInfo product, string productName)
+        {
+            productData.UpdateProductInfos(product, productName);
+        }
 
     }
 

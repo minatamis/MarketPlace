@@ -17,7 +17,6 @@ namespace Market_BusinessRules
             productDataServices = new ProductDataServices();
 
         }
-
         public List<ProductsInfo> ViewProducts()
         {
             return productDataServices.retrieveProducts();
@@ -39,69 +38,26 @@ namespace Market_BusinessRules
             productDataServices.removeProducts(productName);
 
         }
-
-        //public List<ProductsInfo> checkProduct(string prod)
-        //{
-        //    var products  = new List<ProductsInfo>();
-        //    foreach (var product in products)
-        //    {
-        //        if (product.itemName.Contains(prod))
-        //        {
-        //            return products;
-        //        }
-        //    }
-        //    return null;
-        //}
-
-        public static string getProducts(ProductsInfo prod)
+        public bool checkProduct(string prod)
         {
-            string productInfo = "";
-
-            productInfo += $"Item Name: {prod.itemName}\n";
-            productInfo += $"Price: {prod.itemPrice}\n";
-            productInfo += $"Category: {prod.itemCategory} \n";
-            productInfo += $"Description: {prod.itemDescription} \n";
-            productInfo += $"Reason for Selling: {prod.itemRFS} \n";
-
-            return productInfo;
+            var products = new List<ProductsInfo>();
+            foreach (var product in products)
+            {
+                if (product.itemName.Contains(prod))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void UpdateProductData(string itemName, double itemPrice, string itemCategory, string itemDescription, string itemRFS)
+        {
+            //existingProduct.itemPrice = itemprice;
+            //existingProduct.itemCategory = itemcategory;
+            //existingProduct.itemDescription = itemdescription;
+            //existingProduct.itemRFS = ItemRFS;
 
         }
-
-        //public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
-        //{
-        //    ProductsInfo newProduct = new ProductsInfo
-        //    {
-        //        itemName = itemname,
-        //        itemPrice = itemprice,
-        //        itemCategory = itemcategory,
-        //        itemDescription = itemdescription,
-        //        itemRFS = itemRFS
-        //    };
-
-        //    addProduct(newProduct);
-
-        //}
-        //public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
-        //{
-        //    ProductsInfo existingProduct = retrieveProduct(itemname);
-
-        //    if (existingProduct != null)
-        //    {
-        //        existingProduct.itemPrice = itemprice;
-        //        existingProduct.itemCategory = itemcategory;
-        //        existingProduct.itemDescription = itemdescription;
-        //        existingProduct.itemRFS = ItemRFS;
-
-        //        return existingProduct;
-
-        //    }
-        //    else
-        //    {
-        //        return null;
-
-        //    }
-
-        //}
 
     }
 }

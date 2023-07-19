@@ -51,7 +51,7 @@ namespace MarketDataServices
             sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
             sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
             sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
-            //sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
+            sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -74,7 +74,8 @@ namespace MarketDataServices
                     itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString()),
                     itemCategory = sqlDataReader["itemCategory"].ToString(),
                     itemDescription = sqlDataReader["itemDescription"].ToString(),
-                    itemRFS = sqlDataReader["itemRFS"].ToString()
+                    itemRFS = sqlDataReader["itemRFS"].ToString(),
+                    TimeAdded = DateTime.Now
 
                 });
             }
@@ -94,9 +95,19 @@ namespace MarketDataServices
             sqlConnection.Close();
 
         }
-        public void UpdateProductInfos(ProductsInfo productToUpdate)
+        public void UpdateProductInfos(ProductsInfo productToUpdate, string productName)
         {
-            //to figure out
+            string updateStatement = "UPDATE Products SET itemPrice = @itemPrice, itemCategory = @itemCategory, itemDescription = @itemDescription, itemRFS = @itemRFS WHERE itemName = @itemName";
+            SqlCommand sqlCommand = new SqlCommand(updateStatement, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@itemPrice", productToUpdate.itemPrice);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", productToUpdate.itemCategory);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", productToUpdate.itemDescription);
+            sqlCommand.Parameters.AddWithValue("@itemRFS", productToUpdate.itemRFS);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
         }
 
     }
