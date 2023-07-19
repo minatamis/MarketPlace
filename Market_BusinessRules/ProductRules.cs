@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Market_Data;
 using Market_Models;
 
@@ -50,12 +51,21 @@ namespace Market_BusinessRules
             }
             return false;
         }
-        public void UpdateProductData(string itemName, double itemPrice, string itemCategory, string itemDescription, string itemRFS)
+        public void UpdateProductData(ProductsInfo products)
         {
-            //existingProduct.itemPrice = itemprice;
-            //existingProduct.itemCategory = itemcategory;
-            //existingProduct.itemDescription = itemdescription;
-            //existingProduct.itemRFS = ItemRFS;
+            productDataServices.updateProducts(products);
+        }
+        public void UpdateProductData(string Name, double Price, string Category, string Description, string RFS)
+        {
+            ProductsInfo product = new ProductsInfo()
+            {
+                itemName = Name,
+                itemPrice = Price,
+                itemCategory = Category,
+                itemDescription = Description,
+                itemRFS = RFS
+            };
+            productDataServices.updateProducts(product);
 
         }
 

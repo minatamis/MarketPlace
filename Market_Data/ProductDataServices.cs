@@ -53,6 +53,10 @@ namespace Market_Data
         {
             productData.UpdateProductInfos(product, productName);
         }
+        public void updateProducts(ProductsInfo product)
+        {
+            productData.UpdateProductInfos(product);
+        }
 
     }
 

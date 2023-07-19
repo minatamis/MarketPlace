@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MarketDataServices
 {
@@ -51,7 +52,7 @@ namespace MarketDataServices
             sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
             sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
             sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
-            sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
+            sqlCommand.Parameters.AddWithValue("@TimeAdded", DateTime.Now);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -75,7 +76,7 @@ namespace MarketDataServices
                     itemCategory = sqlDataReader["itemCategory"].ToString(),
                     itemDescription = sqlDataReader["itemDescription"].ToString(),
                     itemRFS = sqlDataReader["itemRFS"].ToString(),
-                    TimeAdded = DateTime.Now
+                    TimeAdded = DateTime.Parse(sqlDataReader["TimeAdded"].ToString())
 
                 });
             }
@@ -106,6 +107,27 @@ namespace MarketDataServices
             sqlCommand.Parameters.AddWithValue("@itemRFS", productToUpdate.itemRFS);
 
             sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+        public void UpdateProductInfos(ProductsInfo productToUpdate)
+        {
+            string updateStatement = "UPDATE Products SET itemPrice = @itemPrice, itemCategory = @itemCategory, itemDescription = @itemDescription, itemRFS = @itemRFS WHERE itemName = @itemName";
+            SqlCommand sqlCommand = new SqlCommand(updateStatement, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            double price = (productToUpdate.itemPrice == null) ? Convert.ToDouble(sqlDataReader["itemPrice"].ToString()) : productToUpdate.itemPrice;
+            string category = (productToUpdate.itemCategory == "") ? sqlDataReader["itemCategory"].ToString() : productToUpdate.itemCategory;
+            string description = (productToUpdate.itemDescription == "") ? sqlDataReader["itemDescription"].ToString() : productToUpdate.itemDescription;
+            string rfs = (productToUpdate.itemRFS == "") ? sqlDataReader["itemRFS"].ToString() : productToUpdate.itemRFS;
+
+            sqlCommand.Parameters.AddWithValue("@itemName", productToUpdate.itemName);
+            sqlCommand.Parameters.AddWithValue("@itemPrice", price);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", category);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", description);
+            sqlCommand.Parameters.AddWithValue("@itemRFS", rfs);
+
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
