@@ -10,100 +10,96 @@ namespace MarketPlace
     class Program
     {
         //static List<string> cart = new List<string>();
+
         static DateTime gettime = DateTime.Now;
-        static void Main(string[] args)
+        public static int choice;
+        public static void Main(string[] args)
+        {
+            SystemGreet();
+            ShowMainMenu();
+            GetInput();
+            SelectedOption();
+
+
+        }
+
+        static void ShowMainMenu()
+        {
+            Console.WriteLine("**********************");
+            Console.WriteLine("1. view product list"); // add to cart inside view products if there is a selected product.
+            Console.WriteLine("2. add product to the market"); // seller's pov
+            Console.WriteLine("3. remove product"); // seller's pov
+            Console.WriteLine("4. edit product"); // under construction
+            Console.WriteLine("5. view cart"); // >>>> check out for the confirmation of address and payment method?????
+            Console.WriteLine("6. exit");
+
+        }
+
+        static void SelectedOption()
         {
 
-            ProductRules rules = new ProductRules();
-            List<ProductsInfo> products = new List<ProductsInfo>();
-            products = rules.ViewProducts();
-
-            foreach (var item in products)
+            switch (choice)
             {
-                Console.WriteLine(item.itemName);
-                Console.WriteLine(item.itemPrice);
-                Console.WriteLine(item.itemCategory);
-                Console.WriteLine(item.itemDescription);
-                Console.WriteLine(item.itemRFS);
+                case 1://unfinished
+
+                    MarketFunctions.ViewProducts();
+
+                    break;
+
+                case 2:
+                    MarketFunctions.AddProduct();
+
+                    break;
+
+                case 3:
+                    // marketfunctions.removeproduct();
+
+                    break;
+
+                case 4:
+                    // marketfunctions.editproduct();
+
+                    break;
+
+                case 5:
+                    // viewcart();
+
+                    break;
+
+                case 6:
+                    // environment.exit(0);
+
+                    break;
+
+                default:
+                    //  console.writeline("invalid choice. please try again.");
+
+                    break;
 
             }
 
 
-            //MarketFunctions marketOverview = new MarketFunctions();
-
-            //// Display the main menu and wait for user input
-            //while (true)
-            //{
-            //    Console.Clear();
-            //    int hour = gettime.Hour;
-
-            //    GetHour(hour);
-            //    Console.WriteLine("**********************");
-            //    Console.WriteLine("1. View Product List"); // ADD TO CART INSIDE View Products if there is a selected product.
-            //    Console.WriteLine("2. Add Product to the Market"); // Seller's POV
-            //    Console.WriteLine("3. Remove Product"); // Seller's POV
-            //    Console.WriteLine("4. Edit Product"); // Under Construction
-            //    Console.WriteLine("5. View Cart"); // >>>> Check Out for the confirmation of Address and Payment Method?????
-            //    Console.WriteLine("6. Exit");
-            //    Console.Write("Please select an option: ");
-
-            //    string choice = Console.ReadLine();
-
-            //    switch (choice)
-            //    {
-            //        case "1"://unfinished
-            //            //MarketFunctions.ViewProducts(products);
-            //            ProductRules rules = new ProductRules();
-            //            var list = rules.ViewProducts();
-
-            //            foreach (var item in list)
-            //            {
-            //                Console.WriteLine(item.itemName);
-            //                Console.WriteLine(item.itemPrice);
-            //            }
-
-            //            break;
-
-            //        case "2":
-            //            MarketFunctions.AddProduct();
-
-            //            break;
-
-            //        case "3":
-            //            MarketFunctions.RemoveProduct();
-
-            //            break;
-
-            //        case "4":
-            //            MarketFunctions.EditProduct();
-
-            //            break;
-
-            //        case "5":
-            //            //ViewCart();
-
-            //            break;
-
-            //        case "6":
-            //            Environment.Exit(0);
-
-            //            break;
-
-            //        default:
-            //            Console.WriteLine("Invalid choice. Please try again.");
-
-            //            break;
-
-            //    }
-
-
-            //    Console.WriteLine("\nPress any key to continue...");
-            //    Console.ReadKey();
-
-            //}
+            Console.WriteLine("\npress any key to continue...");
+            Console.ReadKey();
 
         }
+        static int GetInput()
+            {
+                Console.Write("please select an option: ");
+                choice =Convert.ToInt32(Console.ReadLine());
 
+                return choice;
+            }
+
+        
+        static void SystemGreet()
+        {
+            Console.Clear();
+            int hour = gettime.Hour;
+
+            GetHour(hour);
+
+        }
         
 
         static void GetHour(int hour)
@@ -131,6 +127,7 @@ namespace MarketPlace
             }
 
         }
+
 
 
         // Under Construction

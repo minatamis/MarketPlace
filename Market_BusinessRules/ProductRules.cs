@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Market_Data;
 using Market_Models;
@@ -11,14 +12,25 @@ namespace Market_BusinessRules
 {
     public class ProductRules
     {
-        ProductDataServices productDataServices;
+        ProductDataServices productDataServices = new ProductDataServices();
         public ProductRules()
         {
             productDataServices = new ProductDataServices();
         }
-        public static void addProduct(ProductsInfo prod)
+        public void addProduct(string name, double price, string category, string desc, string rfs)
         {
-            //ProductDataServices.products.Add(prod);
+            ProductsInfo productsInfo = new ProductsInfo
+            {
+                itemName = name,
+                itemPrice = price,
+                itemCategory    = category,
+                itemDescription = desc,
+                itemRFS = rfs,
+                TimeAdded = DateTime.Now,
+            };
+
+            productDataServices.addProduct(productsInfo);
+
 
         }
 
@@ -49,55 +61,35 @@ namespace Market_BusinessRules
             return null;
         }
 
-        public static string getProducts(ProductsInfo prod)
-        {
-            string productInfo = "";
 
-            productInfo += $"Item Name: {prod.itemName}\n";
-            productInfo += $"Price: {prod.itemPrice}\n";
-            productInfo += $"Category: {prod.itemCategory} \n";
-            productInfo += $"Description: {prod.itemDescription} \n";
-            productInfo += $"Reason for Selling: {prod.itemRFS} \n";
+        //public static string getProducts(ProductsInfo prod)
+        //{
+        //    string productInfo = "";
 
-            return productInfo;
+        //    productInfo += $"Item Name: {prod.itemName}\n";
+        //    productInfo += $"Price: {prod.itemPrice}\n";
+        //    productInfo += $"Category: {prod.itemCategory} \n";
+        //    productInfo += $"Description: {prod.itemDescription} \n";
+        //    productInfo += $"Reason for Selling: {prod.itemRFS} \n";
 
-        }
+        //    return productInfo;
 
-        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
-        {
-            ProductsInfo newProduct = new ProductsInfo
-            {
-                itemName = itemname,
-                itemPrice = itemprice,
-                itemCategory = itemcategory,
-                itemDescription = itemdescription,
-                itemRFS = itemRFS
-            };
+        //}
 
-            addProduct(newProduct);
+        //public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
+        //{
+        //    ProductsInfo newProduct = new ProductsInfo
+        //    {
+        //        itemName = itemname,
+        //        itemPrice = itemprice,
+        //        itemCategory = itemcategory,
+        //        itemDescription = itemdescription,
+        //        itemRFS = itemRFS
+        //    };
 
-        }
-        public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
-        {
-            ProductsInfo existingProduct = retrieveProduct(itemname);
+        //    addProduct(newProduct);
 
-            if (existingProduct != null)
-            {
-                existingProduct.itemPrice = itemprice;
-                existingProduct.itemCategory = itemcategory;
-                existingProduct.itemDescription = itemdescription;
-                existingProduct.itemRFS = ItemRFS;
-
-                return existingProduct;
-
-            }
-            else
-            {
-                return null;
-
-            }
-
-        }
+        //}
 
     }
 }

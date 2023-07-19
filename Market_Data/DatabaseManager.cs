@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = DESKTOP-UTJ2GI1\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = JINSEYEWEAR-JCR\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         static SqlConnection sqlConnection;
         public DatabaseManager()
         {
@@ -41,7 +41,7 @@ namespace MarketDataServices
 
             return prodList;
         }
-        public void AddProduct(ProductsInfo productsInfo)
+        public void InsertProduct(ProductsInfo productsInfo)
         {
             string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
@@ -50,6 +50,7 @@ namespace MarketDataServices
             sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
             sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
             sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
+            sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -72,14 +73,17 @@ namespace MarketDataServices
                     itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString()),
                     itemCategory = sqlDataReader["itemCategory"].ToString(),
                     itemDescription = sqlDataReader["itemDescription"].ToString(),
-                    itemRFS = sqlDataReader["itemRFS"].ToString()
+                    itemRFS = sqlDataReader["itemRFS"].ToString(),
+                    TimeAdded = DateTime.Now
 
-                });
+                }) ;
             }
             sqlConnection.Close();
 
             return prodList;
         }
+
+
 
         public void UpdateProductInfo(ProductsInfo productToUpdate)
         {

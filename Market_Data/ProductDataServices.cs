@@ -42,6 +42,10 @@ namespace Market_Data
            return productdata.GetProductInfos();
         }
 
+        public void addProduct(ProductsInfo product)
+        {
+            productdata.InsertProduct(product);
+        }
     }
 
 }
