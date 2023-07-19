@@ -41,15 +41,17 @@ namespace MarketDataServices
 
             return prodList;
         }
-        public void AddProduct(ProductsInfo productsInfo)
+        public void InsertProduct(ProductsInfo productsInfo)
         {
             string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
+
             sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
             sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
             sqlCommand.Parameters.AddWithValue("@itemCategory", productsInfo.itemCategory);
             sqlCommand.Parameters.AddWithValue("@itemDescription", productsInfo.itemDescription);
             sqlCommand.Parameters.AddWithValue("@itemRFS", productsInfo.itemRFS);
+            //sqlCommand.Parameters.AddWithValue("@TimeAdded", productsInfo.TimeAdded);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
@@ -80,8 +82,19 @@ namespace MarketDataServices
 
             return prodList;
         }
+        public void DeleteProduct(ProductsInfo productsInfo)
+        {
+            string deleteStatement = "DELETE FROM Products WHERE itemName = @itemName";
+            SqlCommand sqlCommand = new SqlCommand(deleteStatement, sqlConnection);
 
-        public void UpdateProductInfo(ProductsInfo productToUpdate)
+            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+
+        }
+        public void UpdateProductInfos(ProductsInfo productToUpdate)
         {
             //to figure out
         }

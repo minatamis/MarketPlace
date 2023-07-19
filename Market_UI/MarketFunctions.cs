@@ -55,121 +55,121 @@ namespace Market_UI
 
             // Under Construction... (Add to Cart Function)
         }
-        public static void AddProduct()
-        {
-            Console.Clear();
-            Console.WriteLine("Add Product:");
-            Console.WriteLine("*************************");
+        //public static void AddProduct()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Add Product:");
+        //    Console.WriteLine("*************************");
 
-            Console.Write("Enter the name of the product: ");
-            string product = Console.ReadLine();
+        //    Console.Write("Enter the name of the product: ");
+        //    string product = Console.ReadLine();
 
-            if (!string.IsNullOrEmpty(product))
-            {
-                Console.Write("Enter the price of the product: PHP");
-                if (double.TryParse(Console.ReadLine(), out double price))
-                {
-                    Console.Write("Enter the description of the product: ");
-                    string description = Console.ReadLine();
-                    Console.Write("Enter the category of the product: ");
-                    string category = Console.ReadLine();
-                    Console.Write("Enter your reason for selling: ");
-                    string rfs = Console.ReadLine();
+        //    if (!string.IsNullOrEmpty(product))
+        //    {
+        //        Console.Write("Enter the price of the product: PHP");
+        //        if (double.TryParse(Console.ReadLine(), out double price))
+        //        {
+        //            Console.Write("Enter the description of the product: ");
+        //            string description = Console.ReadLine();
+        //            Console.Write("Enter the category of the product: ");
+        //            string category = Console.ReadLine();
+        //            Console.Write("Enter your reason for selling: ");
+        //            string rfs = Console.ReadLine();
 
-                    DateTime timeAdded = DateTime.Now;
+        //            DateTime timeAdded = DateTime.Now;
 
-                    ProductsInfo addProd = new ProductsInfo
-                    {
-                        itemName = product,
-                        itemPrice = price,
-                        itemCategory = category,
-                        itemDescription = description,
-                        itemRFS = rfs,
-                        TimeAdded = timeAdded
-                    };
-                    ProductRules.addProduct(addProd);
+        //            ProductsInfo addProd = new ProductsInfo
+        //            {
+        //                itemName = product,
+        //                itemPrice = price,
+        //                itemCategory = category,
+        //                itemDescription = description,
+        //                itemRFS = rfs,
+        //                TimeAdded = timeAdded
+        //            };
+        //            ProductRules.addProduct(addProd);
 
-                    //products.Add(product, (price, description));
-                    Console.WriteLine("Product has been added.");
+        //            //products.Add(product, (price, description));
+        //            Console.WriteLine("Product has been added.");
 
-                }
-                else
-                {
-                    Console.WriteLine("Price not applicable.");
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Price not applicable.");
 
-                }
+        //        }
 
-            }
-            else
-            {
-                Console.WriteLine("Product name cannot be empty.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Product name cannot be empty.");
 
-            }
+        //    }
 
-        }
-        public static void RemoveProduct()
-        {
-            Console.Clear();
-            Console.WriteLine("Remove Product:");
-            Console.WriteLine("****************************");
+        //}
+        //public static void RemoveProduct()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Remove Product:");
+        //    Console.WriteLine("****************************");
 
-            Console.Write("Enter the name of the product to remove: ");
-            string product = Console.ReadLine();
+        //    Console.Write("Enter the name of the product to remove: ");
+        //    string product = Console.ReadLine();
 
-            if (ProductRules.retrieveProduct(product) != null)
-            {
-                ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
-                ProductRules.removeProduct(prodToDelete);
-                Console.WriteLine("Product has been removed.");
+        //    if (ProductRules.retrieveProduct(product) != null)
+        //    {
+        //        ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
+        //        ProductRules.removeProduct(prodToDelete);
+        //        Console.WriteLine("Product has been removed.");
 
-            }
-            else
-            {
-                Console.WriteLine("Product is not available.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Product is not available.");
 
-            }
+        //    }
 
-        }
+        //}
 
-        public static void EditProduct()
-        {
-            Console.Clear();
-            Console.WriteLine("Edit Product:");
-            Console.WriteLine("**************************");
+        //public static void EditProduct()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Edit Product:");
+        //    Console.WriteLine("**************************");
 
-            Console.Write("Enter the name of the product to Edit: ");
-            string itemName = Console.ReadLine();
+        //    Console.Write("Enter the name of the product to Edit: ");
+        //    string itemName = Console.ReadLine();
 
-            ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
+        //    ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
 
-            if (newprod == null)
-            {
-                Console.WriteLine("Product not found.");
-                return;
+        //    if (newprod == null)
+        //    {
+        //        Console.WriteLine("Product not found.");
+        //        return;
 
-            }
-            else
-            {
-                Console.WriteLine("Enter the new item name: ");
-                newprod.itemName = Console.ReadLine();
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Enter the new item name: ");
+        //        newprod.itemName = Console.ReadLine();
 
-                Console.WriteLine("Enter the new item price:");
-                newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
+        //        Console.WriteLine("Enter the new item price:");
+        //        newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
 
-                Console.WriteLine("Enter the new item category:");
-                newprod.itemCategory = Console.ReadLine();
+        //        Console.WriteLine("Enter the new item category:");
+        //        newprod.itemCategory = Console.ReadLine();
 
-                Console.WriteLine("Enter the new item description:");
-                newprod.itemDescription = Console.ReadLine();
+        //        Console.WriteLine("Enter the new item description:");
+        //        newprod.itemDescription = Console.ReadLine();
 
-                Console.WriteLine("Enter the new reason for selling:");
-                newprod.itemRFS = Console.ReadLine();
+        //        Console.WriteLine("Enter the new reason for selling:");
+        //        newprod.itemRFS = Console.ReadLine();
 
-                Console.WriteLine("Product edited successfully!");
-            }
+        //        Console.WriteLine("Product edited successfully!");
+        //    }
 
 
-        }
+        //}
 
         static string GetTimeAgoString(TimeSpan timeSpan)
         {

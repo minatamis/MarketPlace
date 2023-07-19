@@ -10,18 +10,18 @@ namespace Market_Data
 {
     public class ProductDataServices
     {
-        public List<ProductsInfo> products = new List<ProductsInfo>();
-        DatabaseManager productdata;
+        public List<ProductsInfo> products;
+        DatabaseManager productData;
 
         public ProductDataServices() 
         {
-            productdata = new DatabaseManager();
+            productData = new DatabaseManager();
             products = new List<ProductsInfo>();
      
         }
         public ProductsInfo retrieveProduct(string prod)
         {
-            products = productdata.GetProduct();
+            products = productData.GetProduct();
 
             foreach (var product in products)
             {
@@ -39,7 +39,15 @@ namespace Market_Data
         
         public List<ProductsInfo> retrieveProducts()
         {
-           return productdata.GetProductInfos();
+           return productData.GetProductInfos();
+        }
+        public void removeProducts(ProductsInfo product)
+        {
+            productData.DeleteProduct(product);
+        }
+        public void addProducts(ProductsInfo product)
+        {
+            productData.InsertProduct(product);
         }
 
     }

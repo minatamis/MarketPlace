@@ -27,6 +27,10 @@ namespace MarketPlace
                 Console.WriteLine(item.itemRFS);
 
             }
+            rules.removeProduct("Maica");
+            //rules.addProd("Aldrich",10000,"pogi","di maasim","naaasiman sakin");
+            Console.WriteLine("====================");
+            
 
 
             //MarketFunctions marketOverview = new MarketFunctions();

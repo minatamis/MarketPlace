@@ -15,10 +15,6 @@ namespace Market_BusinessRules
         public ProductRules()
         {
             productDataServices = new ProductDataServices();
-        }
-        public static void addProduct(ProductsInfo prod)
-        {
-            //ProductDataServices.products.Add(prod);
 
         }
 
@@ -26,28 +22,42 @@ namespace Market_BusinessRules
         {
             return productDataServices.retrieveProducts();
         }
-        public static void removeProduct(ProductsInfo prod)
+        public void addProduct(string name, double price, string category, string desc, string rfs)
         {
-            ///*ProductDataServices*/.products.Remove(prod);
-
+            ProductsInfo prodInfo = new ProductsInfo
+            {
+                itemName = name,
+                itemPrice = price,
+                itemCategory = category,
+                itemDescription = desc,
+                itemRFS = rfs
+            };
+            productDataServices.addProducts(prodInfo);
+        }
+        public void removeProduct(string productName)
+        {
+            //List<ProductsInfo> prod = productDataServices.products;
+            foreach (var product in productDataServices.products)
+            {
+                if (product.itemName.Contains(productName))
+                {
+                    productDataServices.removeProducts(product);
+                }
+            }
         }
 
-        public static ProductsInfo retrieveProduct(string prod)
-        {
-            //var products  = productDataServices.retrieveProduct(
-            //foreach (var product in ProductDataServices.products)
-            //{
-            //    if (product.itemName.Contains(prod))
-            //    {
-            //        return product;
-            //    }
-            //    else
-            //    {
-            //        return null;
-            //    }
-            //}
-            return null;
-        }
+        //public List<ProductsInfo> checkProduct(string prod)
+        //{
+        //    var products  = new List<ProductsInfo>();
+        //    foreach (var product in products)
+        //    {
+        //        if (product.itemName.Contains(prod))
+        //        {
+        //            return products;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         public static string getProducts(ProductsInfo prod)
         {
@@ -63,41 +73,41 @@ namespace Market_BusinessRules
 
         }
 
-        public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
-        {
-            ProductsInfo newProduct = new ProductsInfo
-            {
-                itemName = itemname,
-                itemPrice = itemprice,
-                itemCategory = itemcategory,
-                itemDescription = itemdescription,
-                itemRFS = itemRFS
-            };
+        //public void SaveProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string itemRFS)
+        //{
+        //    ProductsInfo newProduct = new ProductsInfo
+        //    {
+        //        itemName = itemname,
+        //        itemPrice = itemprice,
+        //        itemCategory = itemcategory,
+        //        itemDescription = itemdescription,
+        //        itemRFS = itemRFS
+        //    };
 
-            addProduct(newProduct);
+        //    addProduct(newProduct);
 
-        }
-        public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
-        {
-            ProductsInfo existingProduct = retrieveProduct(itemname);
+        //}
+        //public ProductsInfo UpdateProductData(string itemname, double itemprice, string itemcategory, string itemdescription, string ItemRFS)
+        //{
+        //    ProductsInfo existingProduct = retrieveProduct(itemname);
 
-            if (existingProduct != null)
-            {
-                existingProduct.itemPrice = itemprice;
-                existingProduct.itemCategory = itemcategory;
-                existingProduct.itemDescription = itemdescription;
-                existingProduct.itemRFS = ItemRFS;
+        //    if (existingProduct != null)
+        //    {
+        //        existingProduct.itemPrice = itemprice;
+        //        existingProduct.itemCategory = itemcategory;
+        //        existingProduct.itemDescription = itemdescription;
+        //        existingProduct.itemRFS = ItemRFS;
 
-                return existingProduct;
+        //        return existingProduct;
 
-            }
-            else
-            {
-                return null;
+        //    }
+        //    else
+        //    {
+        //        return null;
 
-            }
+        //    }
 
-        }
+        //}
 
     }
 }
