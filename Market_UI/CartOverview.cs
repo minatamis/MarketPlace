@@ -11,74 +11,89 @@ namespace Market_UI
 {
     public class CartOverview
     {
-        //public static void GetUser()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Shipping Info");
+        CartRules cartRules;
+        public CartOverview()
+        {
+            cartRules = new CartRules();
+        }
 
-        //    Console.WriteLine("**************");
+        public void viewCart(string user)
+        {
+            Console.Clear();
+            Console.WriteLine("Cart: ");
+            Console.WriteLine("**************************");
 
-        //    Console.WriteLine("Name: ");
-        //    string name = Console.ReadLine();
+            ProductRules rules = new ProductRules();
+            List<Cart> cartList;
+            cartList = cartRules.ViewCart(user);
 
-        //    Console.WriteLine("Email Address: ");
-        //    string email = Console.ReadLine();
+            if (cartList.Count == 0)
+            {
+                Console.WriteLine("Your Cart is Empty");
+            }
+            else
+            {
+                foreach (var item in cartList)
+                {
+                    Console.WriteLine(cartList.Count+ ")");
+                    Console.WriteLine("Item Name: " + item.itemName);
+                    Console.WriteLine("Price: " + item.itemPrice);
+                }
 
-        //    Console.WriteLine("Mobile Number: ");
-        //    int mnum = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+        public void addToCart()
+        {
+            Console.Clear();
+            Console.WriteLine("Add To Cart:");
+            Console.WriteLine("*************************");
 
-        //    UserInfo getNewUser = new UserInfo
-        //    {
-        //        username = name,
-        //        useremail = email,
-        //        usermobile = mnum,
-        //    };
-        //    UserRules.getUser(getNewUser);
-        //}
+            Console.Write("Enter your name: ");
+            string userName = Console.ReadLine();
 
-        //public static void GetAddress(string address)
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Enter your Address: ");
-        //    address = Console.ReadLine();
+            if (!string.IsNullOrEmpty(userName))
+            {
+                Console.Write("Enter the name of the product: ");
+                string prodName = Console.ReadLine();
 
-        //    UserInfo getAdd = new UserInfo
-        //    {
-        //        useraddress = address
-        //    };
-        //    UserRules.getUser(getAdd);
-        //}
+                cartRules.addToCart(prodName, userName);
+                Console.WriteLine(prodName+" successfully added to your cart " + userName);
+            }
+            else
+            {
+                Console.WriteLine("We need your name");
 
-        //public static void EditUser()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Edit Shipping Info");
-        //    Console.WriteLine("******************************************");
+            }
+        }
+        public void removeCartProduct()
+        {
+            Console.Clear();
+            Console.WriteLine("Remove From Cart:");
+            Console.WriteLine("*************************");
 
-        //    Console.WriteLine("Enter the name you want to edit: ");
-        //    string username = Console.ReadLine();
+            Console.Write("Enter your name: ");
+            string userName = Console.ReadLine();
 
-        //    UserInfo newuser = UserDataServices.users.Find(p => p.username == username);
+            if (!string.IsNullOrEmpty(userName))
+            {
+                Console.Write("Enter the name of the product: ");
+                string prodName = Console.ReadLine();
+                if (!string.IsNullOrEmpty(prodName))
+                {
+                    cartRules.removeFromCart(prodName, userName);
+                    Console.WriteLine(prodName + " successfully removed from your cart " + userName);
+                }
+                else
+                {
+                    Console.WriteLine("Product name cannot be empty");
 
-        //    if (newuser == null)
-        //    {
-        //        Console.WriteLine("User not found");
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Enter the new name: ");
-        //        newuser.username = Console.ReadLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("We need your name");
 
-        //        Console.WriteLine("Enter the new address: ");
-        //        newuser.useraddress = Console.ReadLine();
-
-        //        Console.WriteLine("Enter the new mobile number: ");
-        //        newuser.usermobile = Convert.ToInt32(Console.ReadLine());
-
-        //        Console.WriteLine("User edited successfully!");
-        //    }
-        //}
-
+            }
+        }
     }
 }
