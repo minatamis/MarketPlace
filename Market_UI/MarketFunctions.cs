@@ -50,7 +50,7 @@ namespace Market_UI
                     TimeSpan timeSinceAdded = DateTime.Now - item.TimeAdded;
                     string timeAgo = GetTimeAgoString(timeSinceAdded);
 
-                    Console.WriteLine($"Posted {timeAgo} ago");
+                    Console.WriteLine($"Posted {timeAgo} ago \n");
                 }
 
             }
@@ -61,7 +61,7 @@ namespace Market_UI
         }
         public static void AddProduct()
         {
-            ProductRules productRules = new ProductRules();
+            ProductRules rules = new ProductRules();
             Console.Clear();
             Console.WriteLine("Add Product:");
             Console.WriteLine("*************************");
@@ -84,7 +84,13 @@ namespace Market_UI
 
                     DateTime TimeAdded = DateTime.Now;
 
-                    productRules.addProduct(name, price, desc, category, rfs, TimeAdded);
+
+                    Console.Write("The product was successfully added to the Market Place.");
+
+                    rules.addProduct(name, price, desc, category, rfs, TimeAdded);
+
+
+                    
                 }
                 else
                 {
@@ -99,72 +105,76 @@ namespace Market_UI
 
             }
 
-           
-
         }
-        //public static void RemoveProduct()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Remove Product:");
-        //    Console.WriteLine("****************************");
 
-        //    Console.Write("Enter the name of the product to remove: ");
-        //    string product = Console.ReadLine();
+        public static void RemoveProduct()
+        {
+            ProductRules rules = new ProductRules();
+            Console.Clear();
+            Console.WriteLine("Remove Product:");
+            Console.WriteLine("****************************");
 
-        //    if (ProductRules.retrieveProduct(product) != null)
-        //    {
-        //        ProductsInfo prodToDelete = ProductRules.retrieveProduct(product);
-        //        ProductRules.removeProduct(prodToDelete);
-        //        Console.WriteLine("Product has been removed.");
+            Console.Write("Enter the name of the product to remove: ");
+            string productName = Console.ReadLine();
 
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Product is not available.");
+            if (rules.checkProduct(productName) != null)
+            {
+                rules.removeProduct(productName);
+                Console.WriteLine("Product has been removed.");
+            }
 
-        //    }
-
-        //}
-
-        //public static void EditProduct()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Edit Product:");
-        //    Console.WriteLine("**************************");
-
-        //    Console.Write("Enter the name of the product to Edit: ");
-        //    string itemName = Console.ReadLine();
-
-        //    ProductsInfo newprod = ProductRules.retrieveProduct(itemName);
-
-        //    if (newprod == null)
-        //    {
-        //        Console.WriteLine("Product not found.");
-        //        return;
-
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Enter the new item name: ");
-        //        newprod.itemName = Console.ReadLine();
-
-        //        Console.WriteLine("Enter the new item price:");
-        //        newprod.itemPrice = Convert.ToDouble(Console.ReadLine());
-
-        //        Console.WriteLine("Enter the new item category:");
-        //        newprod.itemCategory = Console.ReadLine();
-
-        //        Console.WriteLine("Enter the new item description:");
-        //        newprod.itemDescription = Console.ReadLine();
-
-        //        Console.WriteLine("Enter the new reason for selling:");
-        //        newprod.itemRFS = Console.ReadLine();
-
-        //        Console.WriteLine("Product edited successfully!");
-        //    }
+            else
+            {
+                Console.WriteLine("Product is not available.");
 
 
-        //}
+
+            }
+        }
+
+
+        public static void EditProduct()
+        {
+            ProductRules rules = new ProductRules();
+            Console.Clear();
+            Console.WriteLine("Edit Product:");
+            Console.WriteLine("**************************");
+            Console.Write("Enter the name of the product to Edit: ");
+            string itemName = Console.ReadLine();
+
+            if (rules.checkProduct(itemName) != null)
+            {
+                Console.WriteLine("Enter the new item name: ");
+                string newName = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item price:");
+                double newPrice = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Enter the new item description:");
+                string newDescription = Console.ReadLine();
+
+                Console.WriteLine("Enter the new item category:");
+                string newCategory = Console.ReadLine();
+
+                Console.WriteLine("Enter the new reason for selling:");
+                string newRFS = Console.ReadLine();
+
+
+
+                Console.WriteLine("Product edited successfully!");
+
+                rules.UpdateProductData(newName, newPrice, newDescription, newCategory, newRFS);
+
+
+            }
+            else
+            {
+                Console.WriteLine("Product not found.");
+                return;
+
+            }
+        }
+
 
         static string GetTimeAgoString(TimeSpan timeSpan)
         {

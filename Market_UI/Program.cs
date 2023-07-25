@@ -15,12 +15,13 @@ namespace MarketPlace
         public static int choice;
         public static void Main(string[] args)
         {
-            SystemGreet();
-            ShowMainMenu();
-            GetInput();
-            SelectedOption();
-
-
+            while (true)
+            {
+                SystemGreet();
+                ShowMainMenu();
+                GetInput();
+                SelectedOption();
+            }
         }
 
         static void ShowMainMenu()
@@ -52,7 +53,7 @@ namespace MarketPlace
                     break;
 
                 case 3:
-                    // marketfunctions.removeproduct();
+                    MarketFunctions.RemoveProduct();
 
                     break;
 

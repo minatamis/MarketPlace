@@ -53,19 +53,21 @@ namespace Market_BusinessRules
             }
             return false;
         }
-        public void UpdateProductData(string Name, double Price, string Category, string Description, string RFS)
+        public void UpdateProductData(string newName, double newPrice, string newDescription, string newCategory, string newRFS)
         {
-            ProductsInfo product = new ProductsInfo()
+
+            ProductsInfo productToUpdate = new ProductsInfo()
             {
-                itemName = Name,
-                itemPrice = Price,
-                itemCategory = Category,
-                itemDescription = Description,
-                itemRFS = RFS
+                itemName = newName,
+                itemPrice = newPrice,
+                itemDescription = newDescription,
+                itemCategory = newCategory,
+                itemRFS = newRFS
             };
-            productDataServices.updateProducts(product);
+            productDataServices.updateProducts(productToUpdate);
 
         }
+
 
     }
 }

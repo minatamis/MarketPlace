@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         
         static SqlConnection sqlConnection;
 
