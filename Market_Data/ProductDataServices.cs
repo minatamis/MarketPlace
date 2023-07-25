@@ -10,7 +10,7 @@ namespace Market_Data
 {
     public class ProductDataServices
     {
-        public List<ProductsInfo> products;
+        private List<ProductsInfo> products;
         DatabaseManager productData;
 
         public ProductDataServices()
@@ -49,9 +49,9 @@ namespace Market_Data
         {
             productData.InsertProduct(product);
         }
-        public void updateProducts(ProductsInfo product, string productName)
+        public void updateProducts(ProductsInfo product)
         {
-            productData.UpdateProductInfos(product, productName);
+            productData.UpdateProductInfos(product);
         }
 
     }

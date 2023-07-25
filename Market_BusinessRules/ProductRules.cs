@@ -31,7 +31,7 @@ namespace Market_BusinessRules
                 itemCategory = category,
                 itemDescription = desc,
                 itemRFS = rfs,
-                TimeAdded = DateTime.Now
+                TimeAdded = TimeAdded
             };
             productDataServices.addProducts(prodInfo);
         }
@@ -53,12 +53,17 @@ namespace Market_BusinessRules
             }
             return false;
         }
-        public void UpdateProductData(string itemName, double itemPrice, string itemCategory, string itemDescription, string itemRFS)
+        public void UpdateProductData(string Name, double Price, string Category, string Description, string RFS)
         {
-            //existingProduct.itemPrice = itemprice;
-            //existingProduct.itemCategory = itemcategory;
-            //existingProduct.itemDescription = itemdescription;
-            //existingProduct.itemRFS = ItemRFS;
+            ProductsInfo product = new ProductsInfo()
+            {
+                itemName = Name,
+                itemPrice = Price,
+                itemCategory = Category,
+                itemDescription = Description,
+                itemRFS = RFS
+            };
+            productDataServices.updateProducts(product);
 
         }
 

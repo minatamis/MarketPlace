@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         
         static SqlConnection sqlConnection;
 
@@ -21,6 +21,8 @@ namespace MarketDataServices
             sqlConnection = new SqlConnection(connectionString);
 
         }
+
+        //market connections
         public List<ProductsInfo> GetProduct()
         {
             string selectStatement = "SELECT itemName, itemPrice FROM Products";
@@ -45,7 +47,7 @@ namespace MarketDataServices
         }
         public void InsertProduct(ProductsInfo prodInfo)
         {
-            
+
             string insertStatement = "INSERT INTO Products VALUES (@itemName, @itemPrice, @itemCategory, @itemDescription, @itemRFS, @TimeAdded)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
 
@@ -98,20 +100,95 @@ namespace MarketDataServices
             sqlConnection.Close();
 
         }
-        public void UpdateProductInfos(ProductsInfo productToUpdate, string productName)
+        public void UpdateProductInfos(ProductsInfo productToUpdate)
         {
             string updateStatement = "UPDATE Products SET itemPrice = @itemPrice, itemCategory = @itemCategory, itemDescription = @itemDescription, itemRFS = @itemRFS WHERE itemName = @itemName";
             SqlCommand sqlCommand = new SqlCommand(updateStatement, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            sqlCommand.Parameters.AddWithValue("@itemPrice", productToUpdate.itemPrice);
-            sqlCommand.Parameters.AddWithValue("@itemCategory", productToUpdate.itemCategory);
-            sqlCommand.Parameters.AddWithValue("@itemDescription", productToUpdate.itemDescription);
-            sqlCommand.Parameters.AddWithValue("@itemRFS", productToUpdate.itemRFS);
+            double price = (productToUpdate.itemPrice == null) ? Convert.ToDouble(sqlDataReader["itemPrice"].ToString()) : productToUpdate.itemPrice;
+            string category = (productToUpdate.itemCategory == "") ? sqlDataReader["itemCategory"].ToString() : productToUpdate.itemCategory;
+            string description = (productToUpdate.itemDescription == "") ? sqlDataReader["itemDescription"].ToString() : productToUpdate.itemDescription;
+            string rfs = (productToUpdate.itemRFS == "") ? sqlDataReader["itemRFS"].ToString() : productToUpdate.itemRFS;
+
+            sqlCommand.Parameters.AddWithValue("@itemPrice", price);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", category);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", description);
+            sqlCommand.Parameters.AddWithValue("@itemRFS", rfs);
+            sqlCommand.Parameters.AddWithValue("@itemName", productToUpdate.itemName);
+
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+
+        }
+
+        //cart connections=====================================================================================================================
+        public void AddtoCart(ProductsInfo productsInfo, string username)
+        {
+            string insertStatement = "INSERT INTO Cart VALUES (@userName, @itemName, @itemPrice)";
+            SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userName", username);
+            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
+            sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
+        public List<Cart> GetCartItems(string username)
+        {
+            string selectStatement = "SELECT * FROM Cart WHERE userName = @userName";
+            SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
+            var cartList = new List<Cart>();
+
+            sqlCommand.Parameters.AddWithValue("@userName", username);
+            sqlCommand.ExecuteNonQuery();
+
+            while (sqlDataReader.Read())
+            {
+                cartList.Add(new Cart
+                {
+                    userName = sqlDataReader["userName"].ToString(),
+                    itemName = sqlDataReader["itemName"].ToString(),
+                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString())
+                });
+            }
+            sqlConnection.Close();
+
+            return cartList;
+        }
+        public void RemoveFromCart(string itemName, string userName)
+        {
+            string deleteStatement = "DELETE FROM Cart WHERE itemName = @itemName AND userName = @userName";
+            SqlCommand sqlCommand = new SqlCommand(deleteStatement, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@itemName", itemName);
+            sqlCommand.Parameters.AddWithValue("@userName", userName);
+
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+        //user connections=====================================================================================================================
+        public void InsertUserInfo(UserInfo userInfo)
+        {
+            string insertStatement = "INSERT INTO UserInfo VALUES (@username, @useraddress, @useremail, @usermobile)";
+            SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@itemName", userInfo.username);
+            sqlCommand.Parameters.AddWithValue("@itemPrice", userInfo.useraddress);
+            sqlCommand.Parameters.AddWithValue("@itemCategory", userInfo.useremail);
+            sqlCommand.Parameters.AddWithValue("@itemDescription", userInfo.usermobile);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
     }
 }
