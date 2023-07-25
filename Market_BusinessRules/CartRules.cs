@@ -19,9 +19,9 @@ namespace Market_BusinessRules
         {
             return cartDataService.getCart(user);
         }
-        public void addToCart(string product, string user)
+        public bool addToCart(string product, string user)
         {
-            cartDataService.addProdToCart(product, user);
+            return cartDataService.addProdToCart(product, user);
         }
         public void removeFromCart(string product, string user)
         {

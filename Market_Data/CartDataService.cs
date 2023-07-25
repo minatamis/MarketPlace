@@ -23,9 +23,9 @@ namespace Market_Data
         {
             return productData.GetCartItems(username);
         }
-        public void addProdToCart(string prodToAdd,string user)
+        public bool addProdToCart(string prodToAdd,string user)
         {
-            productData.AddtoCart(prodToAdd, user);
+            return productData.AddtoCart(prodToAdd, user);
         }
         public void removeProdFromCart(string prodToRemove,string user)
         {

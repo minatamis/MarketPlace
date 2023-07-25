@@ -24,7 +24,7 @@ namespace MarketPlace
             }
         }
 
-        static void ShowMainMenu()
+        public static void ShowMainMenu()
         {
             Console.WriteLine("**********************");
             Console.WriteLine("1. view product list"); // add to cart inside view products if there is a selected product.
@@ -36,7 +36,7 @@ namespace MarketPlace
 
         }
 
-        static void SelectedOption()
+        public static void SelectedOption()
         {
 
             switch (choice)
@@ -84,16 +84,16 @@ namespace MarketPlace
             Console.ReadKey();
 
         }
-        static int GetInput()
-            {
-                Console.Write("please select an option: ");
-                choice =Convert.ToInt32(Console.ReadLine());
+        public static int GetInput()
+        {
+            Console.Write("please select an option: ");
+            choice =Convert.ToInt32(Console.ReadLine());
 
-                return choice;
-            }
+            return choice;
+        }
 
         
-        static void SystemGreet()
+        public static void SystemGreet()
         {
             Console.Clear();
             int hour = gettime.Hour;
@@ -103,7 +103,7 @@ namespace MarketPlace
         }
         
 
-        static void GetHour(int hour)
+        public static void GetHour(int hour)
         {
             if (hour < 12)
             {

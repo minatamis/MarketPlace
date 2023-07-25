@@ -12,14 +12,17 @@ using Microsoft.VisualBasic;
 
 namespace Market_UI
 {
-    public class MarketFunctions
+    public static class MarketFunctions
     {
-        private readonly ProductRules productRules;
+        private static ProductRules productRules = new ProductRules();
+        private static CartOverview cartOverview = new CartOverview();
 
-        public MarketFunctions(DatabaseManager database)
-        {
-            this.productRules = new ProductRules();
-        }
+        //public static MarketFunctions()
+        //{
+        //    productRules 
+        //    cartOverview 
+
+        //}
 
         public static void ViewProducts()
         {
@@ -52,6 +55,23 @@ namespace Market_UI
 
                     Console.WriteLine($"Posted {timeAgo} ago \n");
                 }
+
+                string prod;
+                do
+                {
+                    Console.WriteLine("Enter name of product to add to cart or X to stop adding to cart");
+                    prod = Console.ReadLine();
+                    if(prod == "x" || prod == "X")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        cartOverview.addToCart(prod);
+
+                    }
+
+                } while (prod != "x" || prod != "X");
 
             }
 

@@ -26,6 +26,8 @@ namespace Market_UI
             ProductRules rules = new ProductRules();
             List<Cart> cartList;
             cartList = cartRules.ViewCart(user);
+            double totalPrice=0;
+
 
             if (cartList.Count == 0)
             {
@@ -38,26 +40,30 @@ namespace Market_UI
                     Console.WriteLine(cartList.Count+ ")");
                     Console.WriteLine("Item Name: " + item.itemName);
                     Console.WriteLine("Price: " + item.itemPrice);
+                    totalPrice += item.itemPrice;
                 }
 
             }
         }
-        public void addToCart()
+        public void addToCart(string prodName)
         {
-            Console.Clear();
-            Console.WriteLine("Add To Cart:");
-            Console.WriteLine("*************************");
+            Console.WriteLine("Confirm adding to cart");
 
             Console.Write("Enter your name: ");
             string userName = Console.ReadLine();
 
             if (!string.IsNullOrEmpty(userName))
             {
-                Console.Write("Enter the name of the product: ");
-                string prodName = Console.ReadLine();
-
-                cartRules.addToCart(prodName, userName);
-                Console.WriteLine(prodName+" successfully added to your cart " + userName);
+                if(cartRules.addToCart(prodName, userName))
+                {
+                    Console.WriteLine(prodName + " successfully added to your cart " + userName);
+                }
+                else
+                {
+                    Console.WriteLine("Product not found: " + prodName);
+                }
+                
+                
             }
             else
             {

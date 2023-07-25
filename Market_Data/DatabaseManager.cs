@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         
         static SqlConnection sqlConnection;
 
@@ -127,26 +127,34 @@ namespace MarketDataServices
         }
 
         //cart connections=====================================================================================================================
-        public void AddtoCart(string productName, string username)
+        public bool AddtoCart(string productName, string username)
         {
             string selectStatement = "SELECT itemName,itemPrice FROM Products WHERE itemName = @itemName";
             string insertStatement = "INSERT INTO Cart VALUES (@userName, @itemName, @itemPrice)";
             SqlCommand sqlSelect = new SqlCommand(selectStatement, sqlConnection);
-            SqlCommand sqlAdd = new SqlCommand(insertStatement, sqlConnection);
             sqlConnection.Open();
-            SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
 
             sqlSelect.Parameters.AddWithValue("@itemName", productName);
 
-            string itemName = sqlDataReader["itemName"].ToString();
-            double itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString());
+            SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
+            if(sqlDataReader.Read())
+            {
+                string prodName = sqlDataReader["itemName"].ToString();
+                double ProdPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString());
+                sqlDataReader.Close();
 
-            sqlAdd.Parameters.AddWithValue("@userName", username);
-            sqlAdd.Parameters.AddWithValue("@itemName", itemName);
-            sqlAdd.Parameters.AddWithValue("@itemPrice", itemPrice);
+                SqlCommand sqlAdd = new SqlCommand(insertStatement, sqlConnection);
+                sqlAdd.Parameters.AddWithValue("@userName", username);
+                sqlAdd.Parameters.AddWithValue("@itemName", prodName);
+                sqlAdd.Parameters.AddWithValue("@itemPrice", ProdPrice);
 
-            sqlAdd.ExecuteNonQuery();
+                sqlAdd.ExecuteNonQuery();
+                return true;
+            }
+            sqlSelect.Dispose();
             sqlConnection.Close();
+            return false;
+           
         }
         public List<Cart> GetCartItems(string username)
         {
