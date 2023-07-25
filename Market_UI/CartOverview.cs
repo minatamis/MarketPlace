@@ -3,6 +3,7 @@ using Market_Data;
 using Market_Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +13,24 @@ namespace Market_UI
     public class CartOverview
     {
         CartRules cartRules;
+        UserRules userRules;
         public CartOverview()
         {
             cartRules = new CartRules();
+            userRules = new UserRules();
+        }
+        public static void viewCartStat()
+        {
+            CartOverview cartOverview = new CartOverview();
+            cartOverview.viewCart();
         }
 
-        public void viewCart(string user)
+        public void viewCart()
         {
+            Console.Write("Enter username: ");
+            string user = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("Cart: ");
+            Console.WriteLine(user+"'s Cart: ");
             Console.WriteLine("**************************");
 
             ProductRules rules = new ProductRules();
@@ -37,9 +47,8 @@ namespace Market_UI
             {
                 foreach (var item in cartList)
                 {
-                    Console.WriteLine(cartList.Count+ ")");
                     Console.WriteLine("Item Name: " + item.itemName);
-                    Console.WriteLine("Price: " + item.itemPrice);
+                    Console.WriteLine("Price: " + item.itemPrice+"\n");
                     totalPrice += item.itemPrice;
                 }
                 Console.WriteLine("Total Price: " + totalPrice);
@@ -100,6 +109,28 @@ namespace Market_UI
                 Console.WriteLine("We need your name");
 
             }
+        }
+        public void checkOut(string user)
+        {
+            Console.WriteLine("Proceed Check-out");
+            Console.WriteLine("*************************");
+
+            Console.Write("Enter your address: ");
+            string address = Console.ReadLine();
+            Console.Write("Enter your email: "); 
+            string email = Console.ReadLine();
+            Console.Write("Enter your mobile number: ");
+            string mobile = Console.ReadLine();
+
+            UserInfo userInfo = new UserInfo 
+            {
+                username = user,
+                useraddress = address,
+                useremail = email,
+                usermobile = mobile
+            };
+            userRules.addUser(userInfo);
+
         }
     }
 }

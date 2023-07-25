@@ -41,7 +41,7 @@ namespace MarketPlace
 
             switch (choice)
             {
-                case 1://unfinished
+                case 1:
 
                     MarketFunctions.ViewProducts();
 
@@ -63,17 +63,17 @@ namespace MarketPlace
                     break;
 
                 case 5:
-                    // viewcart();
+                    CartOverview.viewCartStat();
 
                     break;
 
                 case 6:
-                    // environment.exit(0);
+                    Environment.Exit(0);
 
                     break;
 
                 default:
-                    //  console.writeline("invalid choice. please try again.");
+                    Console.WriteLine("invalid choice. please try again.");
 
                     break;
 

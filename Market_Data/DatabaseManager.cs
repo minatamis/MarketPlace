@@ -161,12 +161,11 @@ namespace MarketDataServices
             string selectStatement = "SELECT * FROM Cart WHERE userName = @userName";
             SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
             sqlConnection.Open();
+
+            sqlCommand.Parameters.AddWithValue("@userName", username);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
             var cartList = new List<Cart>();
-
-            sqlCommand.Parameters.AddWithValue("@userName", username);
-            sqlCommand.ExecuteNonQuery();
 
             while (sqlDataReader.Read())
             {
@@ -174,9 +173,11 @@ namespace MarketDataServices
                 {
                     userName = sqlDataReader["userName"].ToString(),
                     itemName = sqlDataReader["itemName"].ToString(),
-                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString())
+                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"])
                 });
             }
+
+            sqlDataReader.Close();
             sqlConnection.Close();
 
             return cartList;
