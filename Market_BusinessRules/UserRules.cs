@@ -16,50 +16,10 @@ namespace Market_BusinessRules
             userDataServices = new UserDataServices();
         }
 
-        public static void getUser(UserInfo user)
+        public void addUser(UserInfo user)
         {
-            //UserDataServices.users.Add(user);
-        }
-
-        public static void addUser(UserInfo user)
-        {
-            //UserDataServices.users.Add(user);
+            userDataServices.AddUser(user);
 
         }
-        public static void removeUser(UserInfo user)
-        {
-            //UserDataServices.users.Remove(user);
-
-        }
-
-        //public void SaveUserData(string userName, string userAddress, int userMobile)
-        //{
-        //    UserInfo newUser = new UserInfo
-        //    {
-        //        username = userName,
-        //        useraddress = userAddress,
-        //        usermobile = userMobile
-        //    };
-
-        //    UserDataServices.users.Add(newUser);
-
-        //}
-
-        //public static UserInfo retrieveUser(string user)
-        //{
-        //    foreach (var userr in UserDataServices.users)
-        //    {
-        //        if (userr.username.Contains(user))
-        //        {
-        //            return userr;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    return null;
-        //}
-
     }
 }

@@ -102,10 +102,13 @@ namespace MarketDataServices
         }
         public void UpdateProductInfos(ProductsInfo productToUpdate)
         {
+            string selectStatement = "SELECT* FROM Products WHERE itemName = @itemName";
             string updateStatement = "UPDATE Products SET itemPrice = @itemPrice, itemCategory = @itemCategory, itemDescription = @itemDescription, itemRFS = @itemRFS WHERE itemName = @itemName";
             SqlCommand sqlCommand = new SqlCommand(updateStatement, sqlConnection);
+            SqlCommand sqlSelect = new SqlCommand(selectStatement, sqlConnection);
+
             sqlConnection.Open();
-            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
 
             double price = (productToUpdate.itemPrice == null) ? Convert.ToDouble(sqlDataReader["itemPrice"].ToString()) : productToUpdate.itemPrice;
             string category = (productToUpdate.itemCategory == "") ? sqlDataReader["itemCategory"].ToString() : productToUpdate.itemCategory;
@@ -124,17 +127,25 @@ namespace MarketDataServices
         }
 
         //cart connections=====================================================================================================================
-        public void AddtoCart(ProductsInfo productsInfo, string username)
+        public void AddtoCart(string productName, string username)
         {
+            string selectStatement = "SELECT itemName,itemPrice FROM Products WHERE itemName = @itemName";
             string insertStatement = "INSERT INTO Cart VALUES (@userName, @itemName, @itemPrice)";
-            SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
-
-            sqlCommand.Parameters.AddWithValue("@userName", username);
-            sqlCommand.Parameters.AddWithValue("@itemName", productsInfo.itemName);
-            sqlCommand.Parameters.AddWithValue("@itemPrice", productsInfo.itemPrice);
-
+            SqlCommand sqlSelect = new SqlCommand(selectStatement, sqlConnection);
+            SqlCommand sqlAdd = new SqlCommand(insertStatement, sqlConnection);
             sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
+            SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
+
+            sqlSelect.Parameters.AddWithValue("@itemName", productName);
+
+            string itemName = sqlDataReader["itemName"].ToString();
+            double itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString());
+
+            sqlAdd.Parameters.AddWithValue("@userName", username);
+            sqlAdd.Parameters.AddWithValue("@itemName", itemName);
+            sqlAdd.Parameters.AddWithValue("@itemPrice", itemPrice);
+
+            sqlAdd.ExecuteNonQuery();
             sqlConnection.Close();
         }
         public List<Cart> GetCartItems(string username)

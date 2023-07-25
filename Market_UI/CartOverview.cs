@@ -11,43 +11,43 @@ namespace Market_UI
 {
     public class CartOverview
     {
-        public static void GetUser()
-        {
-            Console.Clear();
-            Console.WriteLine("Shipping Info");
+        //public static void GetUser()
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Shipping Info");
 
-            Console.WriteLine("**************");
+        //    Console.WriteLine("**************");
 
-            Console.WriteLine("Name: ");
-            string name = Console.ReadLine();
+        //    Console.WriteLine("Name: ");
+        //    string name = Console.ReadLine();
 
-            Console.WriteLine("Email Address: ");
-            string email = Console.ReadLine();
+        //    Console.WriteLine("Email Address: ");
+        //    string email = Console.ReadLine();
 
-            Console.WriteLine("Mobile Number: ");
-            int mnum = Convert.ToInt32(Console.ReadLine());
+        //    Console.WriteLine("Mobile Number: ");
+        //    int mnum = Convert.ToInt32(Console.ReadLine());
 
-            UserInfo getNewUser = new UserInfo
-            {
-                username = name,
-                useremail = email,
-                usermobile = mnum,
-            };
-            UserRules.getUser(getNewUser);
-        }
+        //    UserInfo getNewUser = new UserInfo
+        //    {
+        //        username = name,
+        //        useremail = email,
+        //        usermobile = mnum,
+        //    };
+        //    UserRules.getUser(getNewUser);
+        //}
 
-        public static void GetAddress(string address)
-        {
-            Console.Clear();
-            Console.WriteLine("Enter your Address: ");
-            address = Console.ReadLine();
+        //public static void GetAddress(string address)
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Enter your Address: ");
+        //    address = Console.ReadLine();
 
-            UserInfo getAdd = new UserInfo
-            {
-                useraddress = address
-            };
-            UserRules.getUser(getAdd);
-        }
+        //    UserInfo getAdd = new UserInfo
+        //    {
+        //        useraddress = address
+        //    };
+        //    UserRules.getUser(getAdd);
+        //}
 
         //public static void EditUser()
         //{
