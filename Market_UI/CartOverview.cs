@@ -30,13 +30,13 @@ namespace Market_UI
             Console.Write("Enter username: ");
             string user = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine(user+"'s Cart: ");
+            Console.WriteLine(user + "'s Cart: ");
             Console.WriteLine("**************************");
 
             ProductRules rules = new ProductRules();
             List<Cart> cartList;
             cartList = cartRules.ViewCart(user);
-            double totalPrice=0;
+            double totalPrice = 0;
 
 
             if (cartList.Count == 0)
@@ -48,11 +48,31 @@ namespace Market_UI
                 foreach (var item in cartList)
                 {
                     Console.WriteLine("Item Name: " + item.itemName);
-                    Console.WriteLine("Price: " + item.itemPrice+"\n");
+                    Console.WriteLine("Price: " + item.itemPrice + "\n");
                     totalPrice += item.itemPrice;
                 }
                 Console.WriteLine("Total Price: " + totalPrice);
             }
+            Console.WriteLine("==========================");
+            Console.WriteLine("\nEnter 1 to remove a product from the cart");
+            Console.WriteLine("Enter 2 to Checkout");
+            Console.WriteLine("Press X to return");
+            string choice = Console.ReadLine();
+
+            if (choice == "1")
+            {
+                removeCartProduct(user);
+            }
+            else if (choice == "2")
+            {
+                checkOut(user);
+            }
+            else if (choice.ToUpper() == "X") 
+            {
+                Console.WriteLine("Returning to main menu...");
+            }
+
+
         }
         public void addToCart(string prodName)
         {
@@ -80,14 +100,12 @@ namespace Market_UI
 
             }
         }
-        public void removeCartProduct()
+        public void removeCartProduct(string userName)
         {
             Console.Clear();
             Console.WriteLine("Remove From Cart:");
             Console.WriteLine("*************************");
 
-            Console.Write("Enter your name: ");
-            string userName = Console.ReadLine();
 
             if (!string.IsNullOrEmpty(userName))
             {

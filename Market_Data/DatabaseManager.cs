@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         
         static SqlConnection sqlConnection;
 
@@ -201,10 +201,10 @@ namespace MarketDataServices
             string insertStatement = "INSERT INTO UserInfo VALUES (@username, @useraddress, @useremail, @usermobile)";
             SqlCommand sqlCommand = new SqlCommand(insertStatement, sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@itemName", userInfo.username);
-            sqlCommand.Parameters.AddWithValue("@itemPrice", userInfo.useraddress);
-            sqlCommand.Parameters.AddWithValue("@itemCategory", userInfo.useremail);
-            sqlCommand.Parameters.AddWithValue("@itemDescription", userInfo.usermobile);
+            sqlCommand.Parameters.AddWithValue("@username", userInfo.username);
+            sqlCommand.Parameters.AddWithValue("@useraddress", userInfo.useraddress);
+            sqlCommand.Parameters.AddWithValue("@useremail", userInfo.useremail);
+            sqlCommand.Parameters.AddWithValue("@usermobile", userInfo.usermobile);
 
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
