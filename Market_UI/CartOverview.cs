@@ -42,7 +42,7 @@ namespace Market_UI
                     Console.WriteLine("Price: " + item.itemPrice);
                     totalPrice += item.itemPrice;
                 }
-
+                Console.WriteLine("Total Price: " + totalPrice);
             }
         }
         public void addToCart(string prodName)
