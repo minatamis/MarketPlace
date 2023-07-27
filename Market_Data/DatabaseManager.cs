@@ -12,7 +12,7 @@ namespace MarketDataServices
 {
     public class DatabaseManager
     {
-        static string connectionString = "Data Source = G-HUBSERVER\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
+        static string connectionString = "Data Source = MYOUI\\SQLEXPRESS;Initial Catalog = MarketPlaceDB;Integrated Security = True;";
         
         static SqlConnection sqlConnection;
 
@@ -100,30 +100,40 @@ namespace MarketDataServices
             sqlConnection.Close();
 
         }
-        public void UpdateProductInfos(ProductsInfo productToUpdate)
+        public bool UpdateProductInfos(ProductsInfo productToUpdate)
         {
             string selectStatement = "SELECT* FROM Products WHERE itemName = @itemName";
             string updateStatement = "UPDATE Products SET itemPrice = @itemPrice, itemCategory = @itemCategory, itemDescription = @itemDescription, itemRFS = @itemRFS WHERE itemName = @itemName";
-            SqlCommand sqlCommand = new SqlCommand(updateStatement, sqlConnection);
+            SqlCommand sqlUpdate = new SqlCommand(updateStatement, sqlConnection);
             SqlCommand sqlSelect = new SqlCommand(selectStatement, sqlConnection);
 
             sqlConnection.Open();
+            
+            sqlSelect.Parameters.AddWithValue("@itemName", productToUpdate.itemName);
             SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
 
-            double price = (productToUpdate.itemPrice == null) ? Convert.ToDouble(sqlDataReader["itemPrice"].ToString()) : productToUpdate.itemPrice;
-            string category = (productToUpdate.itemCategory == "") ? sqlDataReader["itemCategory"].ToString() : productToUpdate.itemCategory;
-            string description = (productToUpdate.itemDescription == "") ? sqlDataReader["itemDescription"].ToString() : productToUpdate.itemDescription;
-            string rfs = (productToUpdate.itemRFS == "") ? sqlDataReader["itemRFS"].ToString() : productToUpdate.itemRFS;
+            bool foundRow = sqlDataReader.Read();
+            if (foundRow)
+            {
+                double price = (productToUpdate.itemPrice == null) ? Convert.ToDouble(sqlDataReader["itemPrice"].ToString()) : productToUpdate.itemPrice;
+                string category = (productToUpdate.itemCategory == "") ? sqlDataReader["itemCategory"].ToString() : productToUpdate.itemCategory;
+                string description = (productToUpdate.itemDescription == "") ? sqlDataReader["itemDescription"].ToString() : productToUpdate.itemDescription;
+                string rfs = (productToUpdate.itemRFS == "") ? sqlDataReader["itemRFS"].ToString() : productToUpdate.itemRFS;
 
-            sqlCommand.Parameters.AddWithValue("@itemPrice", price);
-            sqlCommand.Parameters.AddWithValue("@itemCategory", category);
-            sqlCommand.Parameters.AddWithValue("@itemDescription", description);
-            sqlCommand.Parameters.AddWithValue("@itemRFS", rfs);
-            sqlCommand.Parameters.AddWithValue("@itemName", productToUpdate.itemName);
+                sqlDataReader.Close();
 
-            sqlCommand.ExecuteNonQuery();
+                sqlUpdate.Parameters.AddWithValue("@itemPrice", price);
+                sqlUpdate.Parameters.AddWithValue("@itemCategory", category);
+                sqlUpdate.Parameters.AddWithValue("@itemDescription", description);
+                sqlUpdate.Parameters.AddWithValue("@itemRFS", rfs);
+                sqlUpdate.Parameters.AddWithValue("@itemName", productToUpdate.itemName);
+
+                sqlUpdate.ExecuteNonQuery();
+            }
+
+            sqlDataReader.Close();
             sqlConnection.Close();
-
+            return foundRow;
         }
 
         //cart connections=====================================================================================================================
@@ -209,6 +219,33 @@ namespace MarketDataServices
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
+        }
+        public List<UserInfo> GetUserInfo(string username)
+        {
+            string selectStatement = "SELECT * FROM UserInfo WHERE username = @username";
+            SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
+            sqlConnection.Open();
+
+            sqlCommand.Parameters.AddWithValue("@username", username);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            var userList = new List<UserInfo>();
+
+            while (sqlDataReader.Read())
+            {
+                userList.Add(new UserInfo
+                {
+                    username = sqlDataReader["username"].ToString(),
+                    useraddress = sqlDataReader["useraddress"].ToString(),
+                    useremail = sqlDataReader["useremail"].ToString(),
+                    usermobile = sqlDataReader["usermobile"].ToString()
+                });
+            }
+
+            sqlDataReader.Close();
+            sqlConnection.Close();
+
+            return userList;
         }
     }
 }

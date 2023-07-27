@@ -21,5 +21,10 @@ namespace Market_BusinessRules
             userDataServices.AddUser(user);
 
         }
+        public List<UserInfo> getUserInfo(string username)
+        {
+            return userDataServices.getUser(username);
+
+        }
     }
 }

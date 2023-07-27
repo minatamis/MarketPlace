@@ -22,5 +22,9 @@ namespace Market_Data
         {
             userData.InsertUserInfo(user);
         }
+        public List<UserInfo> getUser(string username)
+        {
+            return userData.GetUserInfo(username);
+        }
     }
 }

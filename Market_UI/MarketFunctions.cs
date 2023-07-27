@@ -17,13 +17,6 @@ namespace Market_UI
         private static ProductRules productRules = new ProductRules();
         private static CartOverview cartOverview = new CartOverview();
 
-        //public static MarketFunctions()
-        //{
-        //    productRules 
-        //    cartOverview 
-
-        //}
-
         public static void ViewProducts()
         {
             Console.Clear();
@@ -75,9 +68,6 @@ namespace Market_UI
 
             }
 
-
-
-            // Under Construction... (Add to Cart Function)
         }
         public static void AddProduct()
         {
@@ -142,16 +132,12 @@ namespace Market_UI
                 rules.removeProduct(productName);
                 Console.WriteLine("Product has been removed.");
             }
-
             else
             {
                 Console.WriteLine("Product is not available.");
 
-
-
             }
         }
-
 
         public static void EditProduct()
         {
@@ -162,30 +148,31 @@ namespace Market_UI
             Console.Write("Enter the name of the product to Edit: ");
             string itemName = Console.ReadLine();
 
-            if (rules.checkProduct(itemName) != null)
+            Console.Write("Enter the new item price:");
+            double newPrice = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter the new item description:");
+            string newDescription = Console.ReadLine();
+
+            Console.Write("Enter the new item category:");
+            string newCategory = Console.ReadLine();
+
+            Console.Write("Enter the new reason for selling:");
+            string newRFS = Console.ReadLine();
+
+            ProductsInfo productToUpdate = new ProductsInfo()
             {
-                Console.WriteLine("Enter the new item name: ");
-                string newName = Console.ReadLine();
-
-                Console.WriteLine("Enter the new item price:");
-                double newPrice = Convert.ToDouble(Console.ReadLine());
-
-                Console.WriteLine("Enter the new item description:");
-                string newDescription = Console.ReadLine();
-
-                Console.WriteLine("Enter the new item category:");
-                string newCategory = Console.ReadLine();
-
-                Console.WriteLine("Enter the new reason for selling:");
-                string newRFS = Console.ReadLine();
+                itemName = itemName,
+                itemPrice = newPrice,
+                itemDescription = newDescription,
+                itemCategory = newCategory,
+                itemRFS = newRFS
+            };
 
 
-
+            if (rules.UpdateProductData(productToUpdate))
+            {
                 Console.WriteLine("Product edited successfully!");
-
-                rules.UpdateProductData(newName, newPrice, newDescription, newCategory, newRFS);
-
-
             }
             else
             {

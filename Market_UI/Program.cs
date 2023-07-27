@@ -58,7 +58,7 @@ namespace MarketPlace
                     break;
 
                 case 4:
-                    // marketfunctions.editproduct();
+                    MarketFunctions.EditProduct();
 
                     break;
 
@@ -128,39 +128,6 @@ namespace MarketPlace
             }
 
         }
-
-
-
-        // Under Construction
-        /*static void AddtoCart(Dictionary<string, (double Price, string Description)> products)
-        {
-
-        }*/
-
-
-        //static void ViewCart()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Cart:");
-        //    Console.WriteLine("===========================");
-
-        //    if (cart.Count == 0)
-        //    {
-        //        Console.WriteLine("Cart is empty.");
-        //    }
-        //    else
-        //    {
-        //        int index = 1;
-        //        foreach (string product in cart)
-        //        {
-        //            Console.WriteLine("{0}. {1}", index, product);
-        //            index++;
-
-        //        }
-
-        //    }
-
-        //}
 
     }
 

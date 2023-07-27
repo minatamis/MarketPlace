@@ -49,9 +49,9 @@ namespace Market_Data
         {
             productData.InsertProduct(product);
         }
-        public void updateProducts(ProductsInfo product)
+        public bool updateProducts(ProductsInfo product)
         {
-            productData.UpdateProductInfos(product);
+            return productData.UpdateProductInfos(product);
         }
 
     }
