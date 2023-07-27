@@ -130,24 +130,96 @@ namespace Market_UI
         }
         public void checkOut(string user)
         {
-            Console.WriteLine("Proceed Check-out");
+            Console.WriteLine("\nProceed Check-out");
             Console.WriteLine("*************************");
 
-            Console.Write("Enter your address: ");
-            string address = Console.ReadLine();
-            Console.Write("Enter your email: "); 
-            string email = Console.ReadLine();
-            Console.Write("Enter your mobile number: ");
-            string mobile = Console.ReadLine();
+            UserRules rules = new UserRules();
+            List<UserInfo> userList;
+            userList = userRules.getUserInfo(user);
 
-            UserInfo userInfo = new UserInfo 
+
+            if (userList.Count == 0)
             {
-                username = user,
-                useraddress = address,
-                useremail = email,
-                usermobile = mobile
-            };
-            userRules.addUser(userInfo);
+                Console.Write("Enter your address: ");
+                string address = Console.ReadLine();
+                Console.Write("Enter your email: ");
+                string email = Console.ReadLine();
+                Console.Write("Enter your mobile number: ");
+                string mobile = Console.ReadLine();
+
+                Console.WriteLine("Thank you for purchasing!");
+
+                UserInfo userInfo = new UserInfo
+                {
+                    username = user,
+                    useraddress = address,
+                    useremail = email,
+                    usermobile = mobile
+                };
+                userRules.addUser(userInfo);
+
+            }
+
+            else
+
+            {
+                foreach (var item in userList)
+                {
+                    Console.WriteLine("======Current Contact Information======");
+                    Console.WriteLine("Buyer name: " + item.username);
+                    Console.WriteLine("Home Address: " + item.useraddress);
+                    Console.WriteLine("Email Address: " + item.useremail);
+                    Console.WriteLine("Mobile Number: " + item.usermobile + "\n");
+
+                }
+                Console.WriteLine("Enter 1 to Update your contact information");
+                Console.WriteLine("Enter 2 to proceed to check out");
+                string choice = Console.ReadLine();
+
+                if (choice == "1")
+                {
+                    Console.WriteLine();
+                    Console.Write("Enter your new user name:");
+                    string newUsername = Console.ReadLine();
+
+                    Console.Write("Enter your new Home Address:");
+                    string newUseraddress = Console.ReadLine();
+
+                    Console.Write("Enter your new Email Address:");
+                    string newUseremail = Console.ReadLine();
+
+                    Console.Write("Enter your new Mobile Number:");
+                    string newUsermobile = Console.ReadLine();
+
+                    UserInfo userToUpdate = new UserInfo()
+                    {
+                        username = newUsername,
+                        useraddress = newUseraddress,
+                        useremail = newUseremail,
+                        usermobile = newUsermobile,
+                    };
+
+
+                    if (rules.updateUserInfo(userToUpdate))
+                    {
+                        Console.WriteLine("User contact information updated successfully!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("User not found.");
+                        return;
+
+                    }
+                }
+                else if (choice == "2")
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Thank you for purchasing!");
+                }
+
+
+            }
+
 
         }
     }
