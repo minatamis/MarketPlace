@@ -247,5 +247,38 @@ namespace MarketDataServices
 
             return userList;
         }
+        public bool UpdateUserInfos(UserInfo userToUpdate)
+        {
+            string selectStatement = "SELECT* FROM UserInfo WHERE username = @username";
+            string updateStatement = "UPDATE UserInfo SET useraddress = @useraddress, useremail = @useremail, usermobile = @usermobile WHERE username = @username";
+            SqlCommand sqlUpdate = new SqlCommand(updateStatement, sqlConnection);
+            SqlCommand sqlSelect = new SqlCommand(selectStatement, sqlConnection);
+
+            sqlConnection.Open();
+
+            sqlSelect.Parameters.AddWithValue("@username", userToUpdate.username);
+            SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
+
+            bool foundRow = sqlDataReader.Read();
+            if (foundRow)
+            {
+                string address = (userToUpdate.useraddress == "") ? sqlDataReader["useraddress"].ToString() : userToUpdate.useraddress;
+                string email = (userToUpdate.useremail == "") ? sqlDataReader["useremail"].ToString() : userToUpdate.useremail;
+                string mobile = (userToUpdate.usermobile == "") ? sqlDataReader["usermobile"].ToString() : userToUpdate.usermobile;
+
+                sqlDataReader.Close();
+
+                sqlUpdate.Parameters.AddWithValue("@useraddress", address);
+                sqlUpdate.Parameters.AddWithValue("@useremail", email);
+                sqlUpdate.Parameters.AddWithValue("@usermobile", mobile);
+                sqlUpdate.Parameters.AddWithValue("@username", userToUpdate.username);
+
+                sqlUpdate.ExecuteNonQuery();
+            }
+
+            sqlDataReader.Close();
+            sqlConnection.Close();
+            return foundRow;
+        }
     }
 }

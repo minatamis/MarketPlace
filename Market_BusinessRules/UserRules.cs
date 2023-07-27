@@ -26,5 +26,9 @@ namespace Market_BusinessRules
             return userDataServices.getUser(username);
 
         }
+        public bool updateUserInfo(UserInfo user)
+        {
+            return userDataServices.updateUser(user);
+        }
     }
 }

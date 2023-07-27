@@ -9,8 +9,6 @@ namespace MarketPlace
 {
     class Program
     {
-        //static List<string> cart = new List<string>();
-
         static DateTime gettime = DateTime.Now;
         public static int choice;
         public static void Main(string[] args)

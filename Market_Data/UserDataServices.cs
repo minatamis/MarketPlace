@@ -26,5 +26,9 @@ namespace Market_Data
         {
             return userData.GetUserInfo(username);
         }
+        public bool updateUser(UserInfo user)
+        {
+            return userData.UpdateUserInfos(user);
+        }
     }
 }
