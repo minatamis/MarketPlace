@@ -31,5 +31,9 @@ namespace Market_Data
         {
             productData.RemoveFromCart(prodToRemove, user);
         }
+        public void clearCart(string username)
+        {
+            productData.clearCart(username);
+        }
     }
 }

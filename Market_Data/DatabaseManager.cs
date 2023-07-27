@@ -205,6 +205,17 @@ namespace MarketDataServices
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
+        public void clearCart(string user)
+        {
+            string deleteStatement = "DELETE FROM Cart WHERE userName = @userName";
+            SqlCommand sqlCommand = new SqlCommand(deleteStatement, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userName", user);
+
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
         //user connections=====================================================================================================================
         public void InsertUserInfo(UserInfo userInfo)
         {

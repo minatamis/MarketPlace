@@ -27,5 +27,9 @@ namespace Market_BusinessRules
         {
             cartDataService.removeProdFromCart(product, user);
         }
+        public void ClearCart(string username)
+        {
+            cartDataService.clearCart(username);
+        }
     }
 }

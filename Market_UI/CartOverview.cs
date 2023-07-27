@@ -133,7 +133,8 @@ namespace Market_UI
             Console.WriteLine("\nProceed Check-out");
             Console.WriteLine("*************************");
 
-            UserRules rules = new UserRules();
+            UserRules uRules = new UserRules();
+            CartRules cRules = new CartRules();
             List<UserInfo> userList;
             userList = userRules.getUserInfo(user);
 
@@ -178,10 +179,6 @@ namespace Market_UI
 
                 if (choice == "1")
                 {
-                    Console.WriteLine();
-                    Console.Write("Enter your new user name:");
-                    string newUsername = Console.ReadLine();
-
                     Console.Write("Enter your new Home Address:");
                     string newUseraddress = Console.ReadLine();
 
@@ -193,16 +190,17 @@ namespace Market_UI
 
                     UserInfo userToUpdate = new UserInfo()
                     {
-                        username = newUsername,
+                        username = user,
                         useraddress = newUseraddress,
                         useremail = newUseremail,
                         usermobile = newUsermobile,
                     };
 
-
-                    if (rules.updateUserInfo(userToUpdate))
+                    if (uRules.updateUserInfo(userToUpdate))
                     {
                         Console.WriteLine("User contact information updated successfully!");
+                        Console.WriteLine("Thank you for purchasing!");
+                        cRules.ClearCart(user);
                     }
                     else
                     {
@@ -215,6 +213,7 @@ namespace Market_UI
                 {
                     Console.WriteLine();
                     Console.WriteLine("Thank you for purchasing!");
+                    cRules.ClearCart(user);
                 }
 
 
