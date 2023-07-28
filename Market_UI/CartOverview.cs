@@ -199,8 +199,9 @@ namespace Market_UI
                     if (uRules.updateUserInfo(userToUpdate))
                     {
                         Console.WriteLine("User contact information updated successfully!");
-                        Console.WriteLine("Thank you for purchasing!");
                         cRules.ClearCart(user);
+                        Console.WriteLine("Thank you for purchasing!");
+                        
                     }
                     else
                     {

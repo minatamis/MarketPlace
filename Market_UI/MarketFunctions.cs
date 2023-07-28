@@ -127,9 +127,10 @@ namespace Market_UI
             Console.Write("Enter the name of the product to remove: ");
             string productName = Console.ReadLine();
 
-            if (rules.checkProduct(productName) != null)
+            bool toRemove = rules.removeProduct(productName);
+
+            if (toRemove)
             {
-                rules.removeProduct(productName);
                 Console.WriteLine("Product has been removed.");
             }
             else

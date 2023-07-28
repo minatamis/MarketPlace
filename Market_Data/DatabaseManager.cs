@@ -23,28 +23,29 @@ namespace MarketDataServices
         }
 
         //market connections
-        public List<ProductsInfo> GetProduct()
-        {
-            string selectStatement = "SELECT itemName, itemPrice FROM Products";
-            SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+        //maam sample
+        //public List<ProductsInfo> GetProduct()
+        //{
+        //    string selectStatement = "SELECT itemName, itemPrice FROM Products";
+        //    SqlCommand sqlCommand = new SqlCommand(selectStatement, sqlConnection);
+        //    sqlConnection.Open();
+        //    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-            var prodList = new List<ProductsInfo>();
+        //    var prodList = new List<ProductsInfo>();
 
-            while (sqlDataReader.Read())
-            {
-                prodList.Add(new ProductsInfo
-                {
-                    itemName = sqlDataReader["itemName"].ToString(),
-                    itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString())
+        //    while (sqlDataReader.Read())
+        //    {
+        //        prodList.Add(new ProductsInfo
+        //        {
+        //            itemName = sqlDataReader["itemName"].ToString(),
+        //            itemPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString())
 
-                });
-            }
-            sqlConnection.Close();
+        //        });
+        //    }
+        //    sqlConnection.Close();
 
-            return prodList;
-        }
+        //    return prodList;
+        //}
         public void InsertProduct(ProductsInfo prodInfo)
         {
 
@@ -88,7 +89,7 @@ namespace MarketDataServices
 
             return prodList;
         }
-        public void DeleteProduct(string productsInfo)
+        public bool DeleteProduct(string productsInfo)
         {
             string deleteStatement = "DELETE FROM Products WHERE itemName = @itemName";
             SqlCommand sqlCommand = new SqlCommand(deleteStatement, sqlConnection);
@@ -96,9 +97,10 @@ namespace MarketDataServices
             sqlCommand.Parameters.AddWithValue("@itemName", productsInfo);
 
             sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
+            int boolValue = sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
 
+            return boolValue>0;
         }
         public bool UpdateProductInfos(ProductsInfo productToUpdate)
         {
@@ -147,11 +149,16 @@ namespace MarketDataServices
             sqlSelect.Parameters.AddWithValue("@itemName", productName);
 
             SqlDataReader sqlDataReader = sqlSelect.ExecuteReader();
-            if(sqlDataReader.Read())
+            bool foundRow = sqlDataReader.Read();
+            if (foundRow)
             {
                 string prodName = sqlDataReader["itemName"].ToString();
                 double ProdPrice = Convert.ToDouble(sqlDataReader["itemPrice"].ToString());
                 sqlDataReader.Close();
+
+                sqlConnection.Close();
+
+                sqlConnection.Open();
 
                 SqlCommand sqlAdd = new SqlCommand(insertStatement, sqlConnection);
                 sqlAdd.Parameters.AddWithValue("@userName", username);
@@ -159,11 +166,10 @@ namespace MarketDataServices
                 sqlAdd.Parameters.AddWithValue("@itemPrice", ProdPrice);
 
                 sqlAdd.ExecuteNonQuery();
-                return true;
             }
             sqlSelect.Dispose();
             sqlConnection.Close();
-            return false;
+            return foundRow;
            
         }
         public List<Cart> GetCartItems(string username)

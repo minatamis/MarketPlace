@@ -36,9 +36,9 @@ namespace Market_BusinessRules
             productDataServices.addProducts(prodInfo);
         }
 
-        public void removeProduct(string productName)
+        public bool removeProduct(string productName)
         {
-            productDataServices.removeProducts(productName);
+            return productDataServices.removeProducts(productName);
 
         }
         public bool checkProduct(string prod)
